@@ -27,51 +27,44 @@
                         <button type="submit" mat-stroked-button color="accent" style="margin-left: 3px;">Add
                             Product</button>
                     </div>
+                    <div *ngIf="errorMessage" class="error-message" style="color: red;">
+                        {{ errorMessage }}
+                    </div>
                 </form>
             </div>
             <div class="col-6">
                 <div>
-
                     <div class="dropzone" 
-                    appDrag
-                    (files) = "fileDropped($event)"
-                    >
+                         appDrag
+                         (files)="fileDropped($event)">
                         <div class="text-wrapper">
                             <div class="centered">
                                 Drag and drop your file or,<br> 
                                 <button mat-button (click)="selectFile.click()" class="browse-button">Browse</button> from computer
                             </div>
-                            
                         </div>
                     </div>
-
-
                     <input 
-                    type="file" 
-                    multiple value="select" 
-                    #selectFile (change)="handleFileInput($event)"
-                    style="display: none;">
+                        type="file" 
+                        multiple value="select" 
+                        #selectFile (change)="handleFileInput($event)"
+                        style="display: none;">
                 </div>
-                <!-- /*Image preview section starts below*/ -->
+                <!-- Image preview section starts below -->
                 <div class="mt-5">
                     <div class="row">
                         <mat-grid-list cols="4" rowHeight="1:1">
                             <mat-grid-tile *ngFor="let file of product.productImages; let i = index;">
                                 <div style="position: relative">
-
                                     <mat-icon class="btn-remove-icon" (click)="removeImages(i)">cancel</mat-icon>
-
-
                                     <img [src]="file.url" width="100px" height="100px">
                                 </div>
                             </mat-grid-tile>
                         </mat-grid-list>
                     </div>
                 </div>
-                <!-- /*Image preview section ends*/ -->
-
+                <!-- Image preview section ends -->
             </div>
         </div>
-
     </div>
 </div>
