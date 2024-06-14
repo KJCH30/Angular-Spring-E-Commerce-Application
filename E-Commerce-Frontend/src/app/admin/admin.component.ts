@@ -15,14 +15,15 @@ export class AdminComponent implements OnInit{
   }
 
   forAdmin(){
-    this.userService.forAdmin().subscribe(
-      (response) =>{
+    this.userService.forAdmin().subscribe({
+      next:(response) =>{
         console.log(response)
         this.message = response;
       },
-      (error) =>{
+      error:(error) =>{
         console.log(error)
       }
+    }
     );
   }
 }

@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 
 @Service
 public class UserService {
+    private static final Logger logger = Logger.getLogger(UserService.class.getName());
     @Autowired
     private UserDao userDao;
 
@@ -31,7 +33,23 @@ public class UserService {
         return userDao.save(user);
     }
 
+    public User registerNewVendor(User vendor){
+        Role role = roleDao.findById("Vendor").get();
+        Set<Role> roles = new HashSet<>();
+        roles.add(role);
+        vendor.setRole(roles);
+        vendor.setUserPassword(getEncodedPassword(vendor.getUserPassword()));
+        return userDao.save(vendor);
+    }
+
     public void initRolesAndUser(){
+        //Added Vendor Role
+        Role vendorRole = new Role();
+        vendorRole.setRoleName("Vendor");
+        vendorRole.setRoleDescription("Vendor role for an application");
+        roleDao.save(vendorRole);
+        logger.info("Vendor role added: " + vendorRole);
+
         Role adminRole = new Role();
         adminRole.setRoleName("Admin");
         adminRole.setRoleDescription("Admin role for an application");

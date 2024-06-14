@@ -26,11 +26,22 @@ public class UserController {
     public User registerNewUser(@RequestBody User user){
         return userService.registerNewUser(user);
     }
+//added vendor mapping
+    @PostMapping({"/registerNewVendor"})
+    public User registerNewVendor(@RequestBody User vendor){
+        return userService.registerNewVendor(vendor);
+    }
 
     @GetMapping({"/forAdmin"})
     @PreAuthorize("hasRole('Admin')")
     public String forAdmin(){
         return "This URL is only accessible to Admin";
+    }
+
+    @GetMapping({"/forVendor"})
+    @PreAuthorize("hasRole('Vendor')")
+    public String forVendor(){
+        return "This URL is only accessible to Vendor";
     }
 
     @GetMapping({"/forUser"})

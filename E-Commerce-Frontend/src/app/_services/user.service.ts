@@ -31,6 +31,11 @@ export class UserService {
       responseType: "text"})
   }
 
+  public forVendor(){
+    return this.httpclient.get(this.PATH_OF_API+"/forVendor", {
+      responseType: "text"})
+  }
+
   public roleMatch(allowedRoles : any):boolean{
     let isMatch = false; 
     const userRoles:any = this.userAuthService.getRoles();

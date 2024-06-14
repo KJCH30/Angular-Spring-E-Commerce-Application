@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../_services/user.service';
-import { response } from 'express';
-import { error } from 'console';
 import { UserAuthService } from '../_services/user-auth.service';
 import { Router } from '@angular/router';
 
@@ -12,6 +10,14 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
+
+  hide = true;
+
+  clickEvent(event: Event): void {
+    event.preventDefault(); 
+    event.stopPropagation(); 
+    this.hide = !this.hide;
+  }
 
   constructor(private userService: UserService,
     private userAuthService : UserAuthService,
@@ -31,6 +37,8 @@ export class LoginComponent implements OnInit {
         const role = response.user.role[0].roleName;
         if(role === 'Admin'){
          this.router.navigate(['/admin']);
+        }else if(role === 'Vendor'){
+          this.router.navigate(['/vendor']);
         }else{
           this.router.navigate(['/user']);
         }

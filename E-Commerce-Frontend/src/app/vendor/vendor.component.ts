@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
 
-
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'app-vendor',
+  templateUrl: './vendor.component.html',
+  styleUrl: './vendor.component.css'
 })
-export class UserComponent implements OnInit{
+export class VendorComponent implements OnInit{
   message : any;
   constructor(private userService: UserService){}
 
   ngOnInit(): void{
-    this.forUser()
+    this.forVendor()
   }
 
-  forUser(){
-    this.userService.forUser().subscribe({
+  forVendor(){
+    this.userService.forVendor().subscribe({
       next:
       (response) =>{
         console.log(response)
