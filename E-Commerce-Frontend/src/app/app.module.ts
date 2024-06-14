@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { VendorComponent } from './vendor/vendor.component';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { DragDirective } from './drag.directive';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     LoginComponent,
     ForbiddenComponent,
     VendorComponent,
-    AddNewProductComponent
+    AddNewProductComponent,
+    DragDirective
   ],
   imports: [
     BrowserModule,

@@ -31,6 +31,7 @@ export class AddNewProductComponent {
       next: (response: Product)=>{
         console.log(response);
         productForm.reset()
+        this.product.productImages = []
       },
       error: (error: HttpErrorResponse)=>{
         console.log(error);
@@ -70,5 +71,12 @@ export class AddNewProductComponent {
       }
       this.product.productImages.push(imageHandle);
     }
+  }
+  removeImages(i: number){
+    this.product.productImages.splice(i, 1)
+  }
+
+  fileDropped(imageHandle: ImageHandle){
+    this.product.productImages.push(imageHandle)
   }
 }
