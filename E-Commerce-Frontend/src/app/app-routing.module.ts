@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'vendor', component: VendorComponent, canActivate: [AuthGuard], data: {roles: ['Vendor']}},
   { path: 'login', component: LoginComponent },
   { path: 'forbidden', component: ForbiddenComponent },
-  { path: 'addNewProduct', component: AddNewProductComponent}
+  { path: 'addNewProduct', component: AddNewProductComponent, canActivate: [AuthGuard], data: {roles: ['Vendor', 'Admin']}}
 ];
 
 @NgModule({
