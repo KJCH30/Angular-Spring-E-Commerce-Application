@@ -8,28 +8,40 @@ import { Product } from '../_model/product.model';
   templateUrl: './show-product-details.component.html',
   styleUrl: './show-product-details.component.css'
 })
-export class ShowProductDetailsComponent implements OnInit{
+export class ShowProductDetailsComponent implements OnInit {
   productDetails: Product[] = []
 
   displayedColumns: string[] = ['Id', 'Product Name', 'Product Description',
-     'Product Discounted Price', 'Product Actual Price'];
-  constructor(private productService: ProductService){}
+    'Product Discounted Price', 'Product Actual Price', 'Edit', 'Delete'];
+  constructor(private productService: ProductService) { }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.getAllProducts();
   }
 
-  public getAllProducts(){
+  public getAllProducts() {
     this.productService.getAllProducts().subscribe({
-      next: (resp: Product[]) =>{
+      next: (resp: Product[]) => {
         console.log(resp);
         this.productDetails = resp;
       },
-      error: (error: HttpErrorResponse) =>{
+      error: (error: HttpErrorResponse) => {
         console.log(error);
       }
     }
 
+    )
+  }
+
+  deleteProduct(productId: any) {
+    this.productService.deleteProduct(productId).subscribe({
+      next: (resp: any) => {
+        this.getAllProducts()
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    }
     )
   }
 }
