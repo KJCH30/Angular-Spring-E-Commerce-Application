@@ -27,6 +27,9 @@ import { VendorComponent } from './vendor/vendor.component';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { DragDirective } from './drag.directive';
+import { ShowProductDetailsComponent } from './show-product-details/show-product-details.component';
+import {MatTableModule} from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card'; 
 
 @NgModule({
   declarations: [
@@ -39,7 +42,8 @@ import { DragDirective } from './drag.directive';
     ForbiddenComponent,
     VendorComponent,
     AddNewProductComponent,
-    DragDirective
+    DragDirective,
+    ShowProductDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,9 @@ import { DragDirective } from './drag.directive';
     BrowserAnimationsModule,
     MatIconButton,
     MatIconModule,
-    MatGridListModule
+    MatGridListModule,
+    MatTableModule,
+    MatCardModule
   ],
   providers: [
     AuthGuard,

@@ -8,4 +8,6 @@
 <mat-toolbar color = "primary" *ngIf = "isLoggedIn()">
   <button mat-raised-button color = "secondary" routerLink = "/">Home</button>
   <button *ngIf = "isVendor()||isAdmin()" mat-raised-button color = "secondary" routerLink = "/addNewProduct">Add New Product</button>
+  <button *ngIf = "isVendor()||isAdmin()" mat-raised-button color = "secondary" routerLink = "/showAddedProducts">Show Added Products</button>
 </mat-toolbar>
+
