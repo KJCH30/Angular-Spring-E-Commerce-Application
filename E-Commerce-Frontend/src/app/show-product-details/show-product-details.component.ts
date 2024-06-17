@@ -4,8 +4,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Product } from '../_model/product.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ShowProductImagesDialogComponent } from '../show-product-images-dialog/show-product-images-dialog.component';
-import { ImageProcessingService } from '../image-processing.service';
+import { ImageProcessingService } from '../_services/image-processing.service';
 import { map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-show-product-details',
@@ -19,7 +20,8 @@ export class ShowProductDetailsComponent implements OnInit {
     'Product Discounted Price', 'Product Actual Price', 'Images', 'Edit', 'Delete'];
   constructor(private productService: ProductService,
     public imagesDialog: MatDialog,
-    private imageProcessingService: ImageProcessingService
+    private imageProcessingService: ImageProcessingService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -65,5 +67,9 @@ export class ShowProductDetailsComponent implements OnInit {
       height: '500px',
       width: '800px'
     })
+  }
+
+  editProductDetails(productId: any){
+    this.router.navigate(['/addNewProduct', {productId: productId}])
   }
 }

@@ -24,7 +24,9 @@
                     </mat-form-field>
                     <div align="end">
                         <button mat-stroked-button color="warn">Clear</button>
-                        <button type="submit" mat-stroked-button color="accent" style="margin-left: 3px;">Add
+                        <button type="submit" *ngIf="isNewProduct" mat-stroked-button color="accent" style="margin-left: 3px;">Add
+                            Product</button>
+                        <button type="submit" *ngIf="!isNewProduct" mat-stroked-button color="accent" style="margin-left: 3px;">Update
                             Product</button>
                     </div>
                     <div *ngIf="errorMessage" class="error-message" style="color: red;">
@@ -34,20 +36,16 @@
             </div>
             <div class="col-6">
                 <div>
-                    <div class="dropzone" 
-                         appDrag
-                         (files)="fileDropped($event)">
+                    <div class="dropzone" appDrag (files)="fileDropped($event)">
                         <div class="text-wrapper">
                             <div class="centered">
-                                Drag and drop your file or,<br> 
-                                <button mat-button (click)="selectFile.click()" class="browse-button">Browse</button> from computer
+                                Drag and drop your file or,<br>
+                                <button mat-button (click)="selectFile.click()" class="browse-button">Browse</button>
+                                from computer
                             </div>
                         </div>
                     </div>
-                    <input 
-                        type="file" 
-                        multiple value="select" 
-                        #selectFile (change)="handleFileInput($event)"
+                    <input type="file" multiple value="select" #selectFile (change)="handleFileInput($event)"
                         style="display: none;">
                 </div>
                 <!-- Image preview section starts below -->
