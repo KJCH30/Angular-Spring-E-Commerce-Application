@@ -29,7 +29,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { DragDirective } from './drag.directive';
 import { ShowProductDetailsComponent } from './show-product-details/show-product-details.component';
 import {MatTableModule} from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card'; 
+import { MatCardModule } from '@angular/material/card';
+import { ShowProductImagesDialogComponent } from './show-product-images-dialog/show-product-images-dialog.component'; 
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { MatCardModule } from '@angular/material/card';
     VendorComponent,
     AddNewProductComponent,
     DragDirective,
-    ShowProductDetailsComponent
+    ShowProductDetailsComponent,
+    ShowProductImagesDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +63,8 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatGridListModule,
     MatTableModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule
   ],
   providers: [
     AuthGuard,

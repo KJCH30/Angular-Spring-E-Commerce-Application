@@ -1,13 +1,13 @@
-<mat-toolbar color="primary" class="bg-success">
-  <span style="color: white; font-weight:500">E-Commerce Application</span>
+<mat-toolbar color="primary" class="bg-navbar">
+  <span class="styled-text">E-Commerce Application</span>
   <span class="spacer"></span>
   <button *ngIf = "!isLoggedIn()" routerLink="/login" routerLinkActive="active" mat-raised-button color="primary">Login</button>
   <button *ngIf = "isLoggedIn()" (click) = "logout()" mat-raised-button color="warn">Logout</button>
 </mat-toolbar>
 
-<mat-toolbar color = "primary" *ngIf = "isLoggedIn()">
-  <button mat-raised-button color = "secondary" routerLink = "/">Home</button>
-  <button *ngIf = "isVendor()||isAdmin()" mat-raised-button color = "secondary" routerLink = "/addNewProduct">Add New Product</button>
-  <button *ngIf = "isVendor()||isAdmin()" mat-raised-button color = "secondary" routerLink = "/showAddedProducts">Show Added Products</button>
+<mat-toolbar color = "primary" *ngIf = "isLoggedIn()" class="bg-navbar">
+  <button mat-raised-button color = "secondary" routerLink = "/" class="bg-navbar">Home</button>
+  <button *ngIf = "isVendor()||isAdmin()" mat-raised-button color = "secondary" routerLink = "/addNewProduct" class="bg-navbar">Add New Product</button>
+  <button *ngIf = "isVendor()||isAdmin()" mat-raised-button color = "secondary" routerLink = "/showAddedProducts" class="bg-navbar">Show Added Products</button>
 </mat-toolbar>
 

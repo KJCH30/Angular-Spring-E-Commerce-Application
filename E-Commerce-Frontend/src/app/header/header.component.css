@@ -1,3 +1,14 @@
 .spacer{
     flex: 1 1 auto;
 }
+
+.bg-navbar{
+   background-color: #b4cef5 !important;
+}
+
+.styled-text {
+    font-family: 'Merriweather', serif;
+    font-weight: 600;
+    color: #006ad3; 
+    text-shadow: 1px 1px 4px rgba(38, 37, 37, 0.3);
+}
