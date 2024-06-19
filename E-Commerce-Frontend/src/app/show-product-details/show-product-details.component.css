@@ -1,3 +1,12 @@
 table {
-    width: 100%;
-  }
+  width: 100%;
+}
+
+table td{
+  padding: 12px;
+}
+
+.mat-column-description {
+  width: 35% !important;
+
+}

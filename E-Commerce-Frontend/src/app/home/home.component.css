@@ -1,0 +1,46 @@
+mat-grid-tile {
+    border: 1px solid lightgray;
+    border-radius: 6px;
+  }
+
+  .image-container{
+    position: relative;
+    height: 300px;
+  }
+  .home-page-product-image{
+    max-width: 90%;
+    max-height: 90%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+
+.rupee {
+    font-size: 18px; /* Adjust size if necessary */    
+}
+
+.actual-price {
+    text-decoration: line-through;
+}
+
+.price-container {
+    display: flex;
+    align-items: center;
+}
+
+.price{
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+/* .view-details-container {
+    position: absolute;
+    bottom: 8px; 
+    width: 100%;
+    display: flex;
+    justify-content: left;
+} */ 
