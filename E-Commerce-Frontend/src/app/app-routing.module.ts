@@ -13,6 +13,9 @@ import { ProductResolveService } from './_services/product-resolve.service';
 import { ProductViewDetailsComponent } from './product-view-details/product-view-details.component';
 import { BuyProductComponent } from './buy-product/buy-product.component';
 import { BuyProductResolverService } from './_services/buy-product-resolver.service';
+import path from 'path';
+import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,6 +41,13 @@ const routes: Routes = [
     resolve: {
       productDetails: BuyProductResolverService
     }
+  },
+  { path: 'orderConfirmed', component: OrderConfirmationComponent,
+    canActivate: [AuthGuard], data: {roles: ["User"]}
+  },
+  {
+    path: "register",
+    component: RegisterComponent
   }
 ];
 

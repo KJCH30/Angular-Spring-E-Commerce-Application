@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { OrderDetails } from '../_model/order-details.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../_model/product.model';
 import { ProductService } from '../_services/product.service';
 
@@ -17,7 +17,9 @@ export class BuyProductComponent {
 
   productDetails: Product[] = [];
   constructor(private activatedRoute: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router
+
   ) { }
 
 
@@ -56,6 +58,7 @@ export class BuyProductComponent {
       next: (resp) =>{
         console.log(resp);
         orderForm.reset();
+        this.router.navigate(["/orderConfirmed"])
       },
       error: (err) =>{
         console.log(err);
@@ -63,4 +66,34 @@ export class BuyProductComponent {
     })
   }
 
+  getQuantityForProduct(productId: any){
+    const filteredProduct = this.orderDetails.orderProductQuantityList.filter(
+      (productQuantity) => productQuantity.productId === productId
+    )
+    return filteredProduct[0].quantity
+  }
+
+  getCalculatedTotal(productId:any, productDiscountedPrice:any){
+    const quantity = this.getQuantityForProduct(productId)
+    
+    return quantity * productDiscountedPrice;
+  }
+
+  onQuantityChanged(quantity : any, productId : any){
+    this.orderDetails.orderProductQuantityList.filter(
+      (orderProduct) => orderProduct.productId === productId
+    )[0].quantity = quantity;
+  }
+
+  getCalculatedGrandTotal(){
+    let grandTotal = 0;
+    this.orderDetails.orderProductQuantityList.forEach(
+      (productQuantity) => {
+       const price =  this.productDetails.filter(product => product.productId === productQuantity.productId)[0].productDiscountedPrice
+       grandTotal += productQuantity.quantity * price
+      }
+    )
+    return grandTotal
+  }
+ 
 }

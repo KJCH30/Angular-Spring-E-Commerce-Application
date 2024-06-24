@@ -14,10 +14,9 @@
                         {{p.productDescription}}</p>
                 </div>
                 <div class="mt-2 price-container">
-                    <mat-icon class="rupee">currency_rupee</mat-icon>
                     <div class="price">
-                        <b>{{p.productDiscountedPrice}}</b> &nbsp;
-                        <b class="actual-price">{{p.productActualPrice}}</b>
+                        <b>{{p.productDiscountedPrice | currency :'INR'}} </b> &nbsp;
+                        <b class="actual-price">{{p.productActualPrice  | currency : 'INR'}}</b>
                     </div>
                 </div>
 

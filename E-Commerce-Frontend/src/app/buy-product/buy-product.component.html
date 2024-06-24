@@ -46,7 +46,44 @@
                 </form>
             </div>
             <div class="col-6">
-Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi vero sequi et mollitia esse deserunt, eius ea iste non reiciendis. Incidunt doloremque minima, alias assumenda debitis ad placeat amet nihil?
+                <table class="table">
+                    <thead class="thead">
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Amount</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                        <tr *ngFor = "let product of productDetails">
+                            <td>{{product.productName}}</td>
+                            <td>{{product.productDiscountedPrice | currency : 'INR'}}</td>
+                            <td>
+                                <select
+                                #quantity
+                                class="form-select"
+                                [ngModel]="getQuantityForProduct(product.productId)"
+                                (change)="onQuantityChanged(quantity.value, product.productId)">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </td>
+                            <td>
+                                {{getCalculatedTotal(product.productId, product.productDiscountedPrice) | currency : 'INR'}} 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td>Total</td>
+                            <td> {{getCalculatedGrandTotal() | currency: 'INR'}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
