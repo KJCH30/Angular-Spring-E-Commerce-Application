@@ -23,15 +23,29 @@ public class UserService {
 
     @Autowired
     private RoleDao roleDao;
+
     public User registerNewUser(User user){
         Role role = roleDao.findById("User").get();
-        Set<Role> roles = new HashSet<>();
-        roles.add(role);
-        user.setRole(roles);
 
-        user.setUserPassword(getEncodedPassword(user.getUserPassword()));
+        Set<Role> roleSet = new HashSet<>();
+        roleSet.add(role);
+        user.setRole(roleSet);
+
+        String password = getEncodedPassword(user.getUserPassword());
+        user.setUserPassword(password);
+
         return userDao.save(user);
     }
+
+//    public User registerNewUser(User user){
+//        Role role = roleDao.findById("User").get();
+//        Set<Role> roles = new HashSet<>();
+//        roles.add(role);
+//        user.setRole(roles);
+//
+//        user.setUserPassword(getEncodedPassword(user.getUserPassword()));
+//        return userDao.save(user);
+//    }
 
     public User registerNewVendor(User vendor){
         Role role = roleDao.findById("Vendor").get();

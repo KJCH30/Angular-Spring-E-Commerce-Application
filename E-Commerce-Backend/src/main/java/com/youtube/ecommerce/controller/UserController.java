@@ -26,6 +26,11 @@ public class UserController {
     public User registerNewUser(@RequestBody User user){
         return userService.registerNewUser(user);
     }
+
+//    @PostMapping({"/registerNewUser"})
+//    public User registerNewUser(@RequestBody User user){
+//        return userService.registerNewUser(user);
+//    }
 //added vendor mapping
     @PostMapping({"/registerNewVendor"})
     public User registerNewVendor(@RequestBody User vendor){
