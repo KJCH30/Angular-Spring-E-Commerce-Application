@@ -32,9 +32,9 @@ public class OrderDetailService {
                     orderInput.getFullName(),
                     orderInput.getFullAddress(),
                     orderInput.getContactNumber(),
-                    orderInput.getAlternateContact(),
+                    orderInput.getAlternateContactNumber(),
                     ORDER_PLACED,
-                    product.getProductActualPrice() * o.getQuantity(),
+                    product.getProductDiscountedPrice() * o.getQuantity(),
                     product,
                     user
 

@@ -13,9 +13,9 @@ public class OrderDetail {
     private String orderAlternateContactNumber;
     private String orderStatus;
     private Double orderAmount;
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Product product;
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
     public Integer getOrderId() {
