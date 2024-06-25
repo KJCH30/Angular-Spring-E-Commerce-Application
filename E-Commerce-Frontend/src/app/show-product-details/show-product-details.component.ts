@@ -45,12 +45,12 @@ export class ShowProductDetailsComponent implements OnInit {
         resp.forEach(product => this.productDetails.push(product))
         this.showTable = true
 
-        if(resp.length == 4){
+        if(resp.length == 8){
           this.showLoadButton = true
         }else{
           this.showLoadButton = false
         }
-        
+
       },
       error: (error: HttpErrorResponse) => {
         console.log(error);

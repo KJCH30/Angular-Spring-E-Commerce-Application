@@ -25,15 +25,15 @@ export class HomeComponent implements OnInit {
     this.getAllProducts()
   }
 
-  public getAllProducts() {
-    this.productService.getAllProducts(this.pageNumber)
+  public getAllProducts(searchKey : string = "") {
+    this.productService.getAllProducts(this.pageNumber, searchKey)
     .pipe(
       map((x: Product[], i:any) => x.map((product: Product) => this.imageProcessingService.createImages(product)))
     )
     .subscribe({
       next: (resp: Product[]) => {
         console.log(resp);
-        if(resp.length == 4){
+        if(resp.length == 8){
           this.showLoadButton = true
         }else{
           this.showLoadButton = false
@@ -55,6 +55,11 @@ export class HomeComponent implements OnInit {
   public loadMoreProduct(){
     this.pageNumber += 1;
     this.getAllProducts()
+  }
+  searchByKeyword(searchkeywords : string){
+    this.pageNumber = 0;
+    this.productDetails = []  
+    this.getAllProducts(searchkeywords)  
   }
 
 }
