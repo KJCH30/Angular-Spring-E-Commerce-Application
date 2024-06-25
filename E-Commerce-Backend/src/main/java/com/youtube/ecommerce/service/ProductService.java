@@ -21,8 +21,15 @@ public class ProductService {
     }
 
     public List<Product> getAllProducts(int pageNumber, String searchKey){
-        Pageable pageable = PageRequest.of(pageNumber, 4);
-        return (List<Product>) productDao.findAll(pageable);
+        Pageable pageable = PageRequest.of(pageNumber, 8);
+
+        if (searchKey.equals("")){
+            return (List<Product>) productDao.findAll(pageable);
+        }else{
+            return productDao.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCase(
+                    searchKey, searchKey, pageable
+            );
+        }
     }
 
     public void deleteProductDetails(Integer productId){
