@@ -48,8 +48,9 @@ public class ProductController {
         return imageModels;
     }
     @GetMapping({"/getAllProducts"})
-    public List<Product> getAllProducts(){
-        return productService.getAllProducts();
+    public List<Product> getAllProducts(@RequestParam(defaultValue = "0") int pageNumber,
+                                        @RequestParam(defaultValue = "") String searchKey){
+        return productService.getAllProducts(pageNumber, searchKey);
     }
 
     @GetMapping({"/getProductDetailsById/{productId}"})
