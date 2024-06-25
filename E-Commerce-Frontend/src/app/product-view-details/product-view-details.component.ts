@@ -24,14 +24,12 @@ export class ProductViewDetailsComponent implements OnInit{
     this.selectedImage = index
   }
 
-  buyProduct(productId: any) {
-    this.router.navigate(['/buyProduct'], {
+  buyProduct(productId: number) {
+    this.router.navigate(['/buyProduct', {
       queryParams: {
         isSingleProductCheckout: true,
         id: productId
-      }
-    });
+      }}])
   }
   
-
 }

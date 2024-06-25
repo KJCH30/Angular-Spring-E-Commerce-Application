@@ -26,4 +26,7 @@
             </div>
         </mat-grid-tile>
     </mat-grid-list>
+    <div class="text-center mt-3" style="padding-bottom: 50px;" *ngIf="showLoadButton">
+        <button type="button" mat-raised-button color="warn" (click)="loadMoreProduct()">Load More Products</button>
+    </div>
 </div>
