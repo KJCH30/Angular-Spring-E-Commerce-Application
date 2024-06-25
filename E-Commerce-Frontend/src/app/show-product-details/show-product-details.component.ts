@@ -32,9 +32,9 @@ export class ShowProductDetailsComponent implements OnInit {
     this.getAllProducts();
   }
 
-  public getAllProducts() {
+  public getAllProducts(searchKey: string = "") {
     this.showTable = false
-    this.productService.getAllProducts(this.pageNumber)
+    this.productService.getAllProducts(this.pageNumber, searchKey)
     .pipe(
       map((x: Product[], i:any) => x.map((product: Product) => this.imageProcessingService.createImages(product)))
     )
@@ -90,5 +90,11 @@ export class ShowProductDetailsComponent implements OnInit {
   public loadMoreProduct(){
     this.pageNumber += 1
     this.getAllProducts()
+  }
+
+  searchByKeyword(searchkeywords : string){
+    this.pageNumber = 0;
+    this.productDetails = []  
+    this.getAllProducts(searchkeywords)  
   }
 }

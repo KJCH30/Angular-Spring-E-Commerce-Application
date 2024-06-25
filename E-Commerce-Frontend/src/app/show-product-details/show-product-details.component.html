@@ -1,5 +1,14 @@
 <div class="mt-5 p-3">
-
+  <mat-form-field appearance="outline" class="w-100">
+    <mat-label>Search Products</mat-label>
+    <input matInput 
+    #searchkeywords
+    (keyup)="searchByKeyword(searchkeywords.value)"
+     name="searchKey" 
+     id="searchKey" 
+     placeholder="Search Any Products">
+     <mat-hint>Search</mat-hint>
+</mat-form-field>
   <div *ngIf="showTable">
 
   <table mat-table [dataSource]="productDetails" class="mat-elevation-z8">
