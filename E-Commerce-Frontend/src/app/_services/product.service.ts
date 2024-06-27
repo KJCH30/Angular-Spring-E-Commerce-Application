@@ -51,5 +51,7 @@ export class ProductService {
   public getOrderDetails(): Observable<MyOrderDetails[]>{
     return this.httpClient.get<MyOrderDetails[]>("http://localhost:9090/getOrderDetails")
   }
-
+  public createTransaction(amount : number){
+    return this.httpClient.get("http://localhost:9090/createTransaction/"+ amount)
+  }
 }

@@ -4,7 +4,9 @@ import { OrderDetails } from '../_model/order-details.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../_model/product.model';
 import { ProductService } from '../_services/product.service';
+// import * as Razorpay from 'razorpay';
 
+declare var Razorpay: any;
 @Component({
   selector: 'app-buy-product',
   templateUrl: './buy-product.component.html',
@@ -28,6 +30,7 @@ export class BuyProductComponent {
     fullAddress: '',
     contactNumber: '',
     alternateContactNumber: '',
+    transactionId: '',
     orderProductQuantityList: []
   }
 
@@ -92,5 +95,55 @@ export class BuyProductComponent {
     )
     return grandTotal
   }
- 
+
+  createTransactionAndPlaceOrder(orderForm : NgForm){
+    let amount = this.getCalculatedGrandTotal();
+    this.productService.createTransaction(amount).subscribe({
+      next: (resp) =>{
+        console.log(resp);
+        this.openTransactionModal(resp, orderForm)
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
+  openTransactionModal(response: any, orderForm : NgForm){
+    let options = {
+      order_id: response.orderId,
+      key: response.key,
+      amount: response.amount,
+      currency: response.currency,
+      name: 'E-Commerce Application',
+      description: 'Payment for placing your Order',
+      image: 'https://cdn.pixabay.com/photo/2024/04/05/05/16/e-commerce-8676517_1280.jpg',
+      handler: (response: any) =>{
+        if(response != null && response.razorpay_payment_id != null){
+          this.processResponse(response, orderForm);
+
+        }else{
+          alert("Payment has Failed")
+        }
+      },
+      prefill: {
+        name: 'Jish',
+        email: 'jish@gmail.com',
+        contact: '9807616221'
+      },
+      notes:{
+        address: 'Rajbiraj, Saptari'
+      },
+      theme: {
+        color: '#3399cc'
+      }
+    }
+    let razorPayObject = new Razorpay(options);
+    razorPayObject.open();
+  }
+
+  processResponse(resp: any, orderForm : NgForm){
+    this.orderDetails.transactionId = resp.razorpay_payment_id;
+    this.placeOrder(orderForm)
+  }
 }
