@@ -115,7 +115,7 @@ export class BuyProductComponent {
       key: response.key,
       amount: response.amount,
       currency: response.currency,
-      name: 'E-Commerce Application',
+      name: 'Simply-Cart',
       description: 'Payment for placing your Order',
       image: 'https://cdn.pixabay.com/photo/2024/04/05/05/16/e-commerce-8676517_1280.jpg',
       handler: (response: any) =>{

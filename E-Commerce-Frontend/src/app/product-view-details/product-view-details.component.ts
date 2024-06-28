@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../_model/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../_services/product.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-product-view-details',
@@ -14,7 +15,8 @@ export class ProductViewDetailsComponent implements OnInit{
   product!: Product;
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
+    private productService: ProductService,
+    private cartService: CartService 
   ) { }
   ngOnInit(): void {
     this.product = this.activatedRoute.snapshot.data['product']
@@ -25,7 +27,10 @@ export class ProductViewDetailsComponent implements OnInit{
   addToCart(productId : number){
     this.productService.addToCart(productId).subscribe({
       next: (response) =>{
-        console.log(response);  
+        console.log(response);
+        if (response) {  // Check if cartId is present in response
+          this.cartService.incrementCartCount();
+        }
       },
 
       error: (error) =>{

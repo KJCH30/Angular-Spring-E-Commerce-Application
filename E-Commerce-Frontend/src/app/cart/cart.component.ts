@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../_services/product.service';
 import { error } from 'console';
 import { Router } from '@angular/router';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +14,8 @@ export class CartComponent implements OnInit{
   cartDetails = []
 
   constructor(private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService  
   ) { }
   ngOnInit(): void {
     this.getCartDetails()
@@ -24,6 +26,7 @@ export class CartComponent implements OnInit{
       next: (response: any) => {
         console.log(response)
         this.cartDetails = response
+        this.cartService.updateCartCount(this.cartDetails.length);
       },
       error: (error) =>{
         console.log(error);    
