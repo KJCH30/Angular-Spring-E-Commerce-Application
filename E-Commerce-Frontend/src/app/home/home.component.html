@@ -1,43 +1,37 @@
 <div class="container mt-5">
-    <mat-form-field appearance="outline" class="w-100">
-        <mat-label>Search Products</mat-label>
-        <input matInput 
+    <mat-form-field appearance="outline" class="search-field">
+      <mat-icon matPrefix>search</mat-icon>
+      <mat-label>Search Products</mat-label>
+      <input matInput
         #searchkeywords
         (keyup)="searchByKeyword(searchkeywords.value)"
-         name="searchKey" 
-         id="searchKey" 
-         placeholder="Search Any Products">
-         <mat-hint>Search</mat-hint>
+        name="searchKey"
+        id="searchKey"
+        placeholder="Search Any Products">
+      <mat-hint>Search</mat-hint>
     </mat-form-field>
-
-    <mat-grid-list cols="4" rowHeight="4:7" gutterSize="10">
-        <mat-grid-tile *ngFor="let p of productDetails">
-            <div class="row p-5">
-                <div class="image-container">
-                    <img class="home-page-product-image" [src]="p.productImages[0].url" alt="">
-                </div>
-                <div class="mt-3">
-                    <p><b>{{p.productName}}</b></p>
-                </div>
-                <div class="mt-2">
-                    <p
-                        style="white-space: inherit; height: 50px; width: 288px; overflow:hidden; text-overflow:ellipsis">
-                        {{p.productDescription}}</p>
-                </div>
-                <div class="mt-2 price-container">
-                    <div class="price">
-                        <b>{{p.productDiscountedPrice | currency :'INR'}} </b> &nbsp;
-                        <b class="actual-price">{{p.productActualPrice  | currency : 'INR'}}</b>
-                    </div>
-                </div>
-
-                <div class="mt-2 view-details-container">
-                    <button mat-flat-button color="warn" (click)="showProductDetails(p.productId)">View Details</button>
-                </div>
+  
+    <mat-grid-list cols="4" rowHeight="4:7" gutterSize="16" class="product-grid">
+      <mat-grid-tile *ngFor="let p of productDetails" class="product-tile">
+        <div class="product-card">
+          <div class="image-container">
+            <img class="home-page-product-image" [src]="p.productImages[0].url" alt="">
+          </div>
+          <div class="product-info">
+            <p class="product-name"><b>{{p.productName}}</b></p>
+            <p class="product-description">{{p.productDescription}}</p>
+            <div class="price-container">
+              <span class="discounted-price">{{p.productDiscountedPrice | currency :'INR'}}</span>
+              <span class="actual-price">{{p.productActualPrice | currency : 'INR'}}</span>
             </div>
-        </mat-grid-tile>
+            <button mat-flat-button color="accent" class="details-button" (click)="showProductDetails(p.productId)">View Details</button>
+          </div>
+        </div>
+      </mat-grid-tile>
     </mat-grid-list>
+  
     <div class="text-center mt-3" style="padding-bottom: 50px;" *ngIf="showLoadButton">
-        <button type="button" mat-raised-button color="warn" (click)="loadMoreProduct()">Load More Products</button>
+      <button type="button" mat-raised-button color="primary" (click)="loadMoreProduct()">Load More Products</button>
     </div>
-</div>
+  </div>
+  

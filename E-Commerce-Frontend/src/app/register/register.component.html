@@ -1,39 +1,45 @@
 <div class="container mt-5">
-    <div class="card w-50 mx-auto" style="padding: 20px;">
-        <form #registerForm = "ngForm" (ngSubmit)="register(registerForm)">
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Username</mat-label>
-                <input matInput 
-                ngModel name="userName" id="userName" 
-                placeholder="Username">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Firstname</mat-label>
-                <input matInput 
-                ngModel name="userFirstName" id="userFirstName" 
-                placeholder="Firstname">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Lastname</mat-label>
-                <input matInput 
-                ngModel name="userLastName" id="userLastName" 
-                placeholder="Lastname">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Enter your password</mat-label>
-                <input ngModel name="userPassword" id="userPassword" matInput [type]="hide ? 'password' : 'text'">
-                <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-            </mat-form-field>
-
-            <div class="text-center">
-                <button mat-flat-button type="submit" class="w-75">Register</button>
-            </div>
-        </form>
+    <div class="register-card card mx-auto">
+      <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Username</mat-label>
+          <input matInput ngModel name="userName" id="userName" placeholder="Username" required>
+          <mat-error *ngIf="registerForm.controls['userName']?.invalid && registerForm.controls['userName']?.touched">
+            Username is required
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Firstname</mat-label>
+          <input matInput ngModel name="userFirstName" id="userFirstName" placeholder="Firstname" required>
+          <mat-error *ngIf="registerForm.controls['userFirstName']?.invalid && registerForm.controls['userFirstName']?.touched">
+            Firstname is required
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Lastname</mat-label>
+          <input matInput ngModel name="userLastName" id="userLastName" placeholder="Lastname" required>
+          <mat-error *ngIf="registerForm.controls['userLastName']?.invalid && registerForm.controls['userLastName']?.touched">
+            Lastname is required
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Enter your password</mat-label>
+          <input ngModel name="userPassword" id="userPassword" matInput [type]="hide ? 'password' : 'text'" required>
+          <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="registerForm.controls['userPassword']?.invalid && registerForm.controls['userPassword']?.touched">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+  
+        <div class="text-center">
+          <button mat-flat-button type="submit" class="w-75" color="primary" [disabled]="registerForm.invalid">Register</button>
+        </div>
+      </form>
     </div>
-</div>
+  </div>
+  

@@ -1,14 +1,75 @@
-.spacer{
-    flex: 1 1 auto;
+.spacer {
+  flex: 1 1 auto;
 }
 
-.bg-navbar{
-   background-color: #b4cef5 !important;
+.bg-navbar {
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .styled-text {
-    font-family: 'Merriweather', serif;
-    font-weight: 600;
-    color: #006ad3; 
-    text-shadow: 1px 1px 4px rgba(38, 37, 37, 0.3);
+  font-family: 'Merriweather', serif;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.styled-text:hover {
+  text-decoration: underline;
+}
+
+.login-button,
+.logout-button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  background-color: #ffffff !important;
+  color: #6a11cb !important;
+  margin-right: 10px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-button:hover,
+.logout-button:hover {
+  background-color: #6a11cb !important;
+  color: #ffffff !important;
+}
+
+.nav-button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  background-color: #ffffff !important;
+  color: #2575fc !important;
+  margin: 0 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-button:hover {
+  background-color: #2575fc !important;
+  color: #ffffff !important;
+}
+
+.mat-icon-button {
+  color: #2575fc !important;
+}
+
+.mat-icon-button:hover {
+  background-color: transparent !important;
+  color: #ffffff !important;
+}
+
+.cart-button {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
 }
