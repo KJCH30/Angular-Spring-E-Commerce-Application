@@ -7,4 +7,6 @@ export interface Product{
     productDiscountedPrice: number,
     productActualPrice: number,
     productImages: ImageHandle[]
+    isWishlisted?: boolean;
+    isAddedToCart?: boolean;
 }

@@ -39,6 +39,7 @@ import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +59,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     OrderConfirmationComponent,
     RegisterComponent,
     CartComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,7 +77,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     MatGridListModule,
     MatTableModule,
     MatCardModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
     AuthGuard,
