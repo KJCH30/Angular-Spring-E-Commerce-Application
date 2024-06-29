@@ -98,6 +98,6 @@ export class ShowProductDetailsComponent implements OnInit {
   }
 
   toggleDescription(element: any) {
-    element.isDescriptionExpanded = !element.isDescriptionExpanded;
+    element.showFullDescription = !element.showFullDescription;
   }
 }

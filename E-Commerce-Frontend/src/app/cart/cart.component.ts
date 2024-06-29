@@ -66,4 +66,8 @@ export class CartComponent implements OnInit{
       }
     });
   }
+
+  toggleDescription(element: any) {
+    element.showFullDescription = !element.showFullDescription;
+  }
 }

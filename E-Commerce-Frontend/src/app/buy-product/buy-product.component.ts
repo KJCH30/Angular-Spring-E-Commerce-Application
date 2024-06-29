@@ -4,6 +4,7 @@ import { OrderDetails } from '../_model/order-details.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../_model/product.model';
 import { ProductService } from '../_services/product.service';
+import { CartService } from '../cart.service';
 // import * as Razorpay from 'razorpay';
 
 declare var Razorpay: any;
@@ -20,7 +21,8 @@ export class BuyProductComponent {
   productDetails: Product[] = [];
   constructor(private activatedRoute: ActivatedRoute,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
 
   ) { }
 
@@ -59,6 +61,7 @@ export class BuyProductComponent {
         console.log(resp);
         orderForm.reset();
         this.router.navigate(["/orderConfirmed"])
+        this.cartService.updateCartCount(0)
       },
       error: (err) =>{
         console.log(err);
