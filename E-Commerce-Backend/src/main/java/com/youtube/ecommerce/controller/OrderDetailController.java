@@ -24,9 +24,10 @@ public class OrderDetailController {
     }
 
     @PreAuthorize("hasRole('User')")
-    @GetMapping({"/getOrderDetails"})
-    public List<OrderDetail> getOrderDetails(){
-        return orderDetailService.getOrderDetails();
+    @GetMapping("/getOrderDetails")
+    public List<OrderDetail> getOrderDetails(@RequestParam(defaultValue = "0") int page,
+                                             @RequestParam(defaultValue = "10") int size) {
+        return orderDetailService.getOrderDetails(page, size);
     }
 
     @PreAuthorize("hasRole('User')")

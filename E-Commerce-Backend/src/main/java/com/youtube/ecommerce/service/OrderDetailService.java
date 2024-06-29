@@ -10,6 +10,10 @@ import com.youtube.ecommerce.dao.UserDao;
 import com.youtube.ecommerce.entity.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -51,7 +55,6 @@ public class OrderDetailService {
             );
             orderDetailDao.save(orderDetail);
         }
-
         // Empty the cart if not a single product checkout
         if (!isSingleProductCheckout){
             List<Cart> carts = cartDao.findByUser(user);
@@ -59,12 +62,14 @@ public class OrderDetailService {
         }
     }
 
-    public List<OrderDetail> getOrderDetails(){
+    public List<OrderDetail> getOrderDetails(int page, int size){
         String currentUser = JwtRequestFilter.CURRENT_USER;
-        User user = userDao.findById(currentUser).get();
-
-        return orderDetailDao.findByUser(user);
+        User user = userDao.findById(currentUser).orElse(null);
+        Pageable pageable = PageRequest.of(page, size);
+        return orderDetailDao.findByUser(user, pageable);
     }
+
+
 
     public TransactionDetails createTransaction(Double amount){
         //amount
