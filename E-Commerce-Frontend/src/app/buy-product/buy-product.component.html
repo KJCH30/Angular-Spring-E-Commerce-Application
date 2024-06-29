@@ -1,51 +1,37 @@
 <div class="container mt-5">
     <div class="card p-3">
         <div class="row">
-            <div class="col-6">
-                <form #orderForm="ngForm" 
-                (ngSubmit)="createTransactionAndPlaceOrder(orderForm)">
-                    <mat-form-field appearance="outline" 
-                    class="w-100">
+            <div class="col-12 col-md-6 pr-md-3">
+                <form #orderForm="ngForm" (ngSubmit)="createTransactionAndPlaceOrder(orderForm)" class="needs-validation" novalidate>
+                    <mat-form-field appearance="outline" class="w-100 mb-3">
                         <mat-label>Full Name</mat-label>
-                        <input matInput 
-                        placeholder="Full Name" 
-                        [(ngModel)]="orderDetails.fullName" 
-                        name="fullName">
+                        <input matInput placeholder="Full Name" [(ngModel)]="orderDetails.fullName" name="fullName" required>
+                        <mat-error *ngIf="orderForm.controls['fullName']?.invalid">Full Name is required</mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" 
-                    class="w-100">
+                    <mat-form-field appearance="outline" class="w-100 mb-3">
                         <mat-label>Full Address</mat-label>
-                        <input matInput 
-                        placeholder="Full Address" 
-                        [(ngModel)]="orderDetails.fullAddress" 
-                        name="fullAddress">
+                        <input matInput placeholder="Full Address" [(ngModel)]="orderDetails.fullAddress" name="fullAddress" required>
+                        <mat-error *ngIf="orderForm.controls['fullAddress']?.invalid">Full Address is required</mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" 
-                    class="w-100">
+                    <mat-form-field appearance="outline" class="w-100 mb-3">
                         <mat-label>Contact Number</mat-label>
-                        <input matInput 
-                        placeholder="Contact Number" 
-                        [(ngModel)]="orderDetails.contactNumber" 
-                        name="contactNumber">
+                        <input matInput placeholder="Contact Number" [(ngModel)]="orderDetails.contactNumber" name="contactNumber" required pattern="[0-9]{10}">
+                        <mat-error *ngIf="orderForm.controls['contactNumber']?.invalid">Contact Number is required and should be 10 digits</mat-error>
                     </mat-form-field>
 
-                    <mat-form-field appearance="outline" 
-                    class="w-100">
+                    <mat-form-field appearance="outline" class="w-100 mb-3">
                         <mat-label>Alternate Contact Number</mat-label>
-                        <input matInput 
-                        placeholder="Alternate Contact Number" 
-                        [(ngModel)]="orderDetails.alternateContactNumber" 
-                        name="alternateContact">
+                        <input matInput placeholder="Alternate Contact Number" [(ngModel)]="orderDetails.alternateContactNumber" name="alternateContact" pattern="[0-9]{10}">
                     </mat-form-field>
 
                     <div align="right">
-                        <button mat-stroked-button color="primary" type="submit">Place Order</button>
+                        <button mat-stroked-button color="primary" type="submit" class="custom-button" [disabled]="orderForm.invalid">Place Order</button>
                     </div>
                 </form>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6 pl-md-3">
                 <table class="table">
                     <thead class="thead">
                         <tr>
@@ -56,36 +42,28 @@
                         </tr>
                     </thead>
                     <tbody class="tbody">
-                        <tr *ngFor = "let product of productDetails">
+                        <tr *ngFor="let product of productDetails">
                             <td>{{product.productName}}</td>
                             <td>{{product.productDiscountedPrice | currency : 'INR'}}</td>
                             <td>
-                                <select
-                                #quantity
-                                class="form-select"
-                                [ngModel]="getQuantityForProduct(product.productId)"
-                                (change)="onQuantityChanged(quantity.value, product.productId)">
+                                <select #quantity class="form-select" [ngModel]="getQuantityForProduct(product.productId)" (change)="onQuantityChanged(quantity.value, product.productId)">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
                                 </select>
                             </td>
-                            <td>
-                                {{getCalculatedTotal(product.productId, product.productDiscountedPrice) | currency : 'INR'}} 
-                            </td>
+                            <td>{{getCalculatedTotal(product.productId, product.productDiscountedPrice) | currency : 'INR'}}</td>
                         </tr>
                         <tr>
                             <td></td>
                             <td></td>
                             <td>Total</td>
-                            <td> {{getCalculatedGrandTotal() | currency: 'INR'}}</td>
-
+                            <td>{{getCalculatedGrandTotal() | currency: 'INR'}}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
 </div>

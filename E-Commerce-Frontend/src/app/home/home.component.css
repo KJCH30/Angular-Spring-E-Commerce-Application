@@ -5,11 +5,32 @@
 }
 
 .search-field {
-  width: 100%;
+  width: 80%;
   margin-bottom: 20px;
   border-radius: 50px;
   padding: 0 10px;
   box-shadow: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.filter-button {
+  width: 15%;
+  margin-bottom: 20px;
+  border-radius: 50px;
+  padding: 10px 15px;
+  background-color: #e9a52f; /* Custom color */
+  color: white;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.filter-button:hover {
+  background-color: #e4e95d; /* Custom hover color */
 }
 
 .mat-form-field-outline {
@@ -18,6 +39,11 @@
 
 .mat-icon {
   color: #6a11cb;
+}
+
+.filter-button-container {
+  display: flex;
+  align-items: center;
 }
 
 .product-tile {
@@ -73,12 +99,14 @@
 .product-info {
   padding: 15px;
 }
+
 .tick-mark {
   position: absolute;
   top: 5px;
   right: 5px;
   color: green; /* Customize tick mark color */
 }
+
 .product-name {
   font-size: 1.2rem;
   color: #2c3e50;
@@ -127,7 +155,7 @@
 }
 
 .details-button:hover {
-  background-color: #2575fc !important;
+  background-color: #e4e95d !important;
 }
 
 .cart-button {
@@ -139,10 +167,11 @@
 }
 
 .cart-button:hover {
-  background-color: #ff79b0 !important;
+  background-color: #4eea58 !important;
 }
 
 /* Responsive Styles */
+
 @media (max-width: 1200px) {
   .product-grid {
     grid-template-columns: repeat(3, 1fr) !important;
@@ -179,5 +208,18 @@
   .details-button,
   .cart-button {
     font-size: 0.9rem;
+  }
+
+  .search-field {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .filter-button {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .filter-button-container {
+    margin-bottom: 20px;
   }
 }

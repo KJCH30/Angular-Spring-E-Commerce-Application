@@ -17,7 +17,6 @@ export class ShowProductDetailsComponent implements OnInit {
   showLoadButton = false;
   pageNumber :number = 0
   showTable = false
-
   productDetails: Product[] = []
 
   displayedColumns: string[] = ['Id', 'Product Name', 'description',
@@ -96,5 +95,9 @@ export class ShowProductDetailsComponent implements OnInit {
     this.pageNumber = 0;
     this.productDetails = []  
     this.getAllProducts(searchkeywords)  
+  }
+
+  toggleDescription(element: any) {
+    element.isDescriptionExpanded = !element.isDescriptionExpanded;
   }
 }

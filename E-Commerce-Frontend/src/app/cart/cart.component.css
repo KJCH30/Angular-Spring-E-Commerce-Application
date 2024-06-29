@@ -1,12 +1,73 @@
 table {
-    width: 100%;
-  }
-  
-  table td{
-    padding: 12px;
-  }
-  
-  .mat-column-Description {
-    width: 35% !important;
-  
-  }
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
+table td, table th {
+  padding: 12px;
+  text-align: left;
+}
+
+.mat-header-cell {
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #6a11cb;
+}
+
+.mat-cell {
+  background-color: #f3f4f6;
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.3s;
+}
+
+.mat-cell:hover {
+  background-color: #e0f7fa;
+}
+
+.cart-table {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.checkout-button {
+  background-color: #6a11cb;
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.checkout-button:hover {
+  background-color: #2575fc;
+}
+
+.remove-button {
+  color: red;
+  background-color: transparent;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.remove-button:hover {
+  color: #ff79b0;
+  transform: scale(1.2);
+}
+
+.mat-column-Description {
+  width: 35% !important;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 15px;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.mt-5 {
+  margin-top: 3rem;
+}

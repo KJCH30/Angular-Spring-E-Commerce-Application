@@ -11,6 +11,15 @@
     <mat-hint>Search</mat-hint>
   </mat-form-field>
 
+  <button mat-button [matMenuTriggerFor]="filterMenu" class="filter-button">
+    Filter <mat-icon>filter_list</mat-icon>
+  </button>
+  <mat-menu #filterMenu="matMenu">
+    <button mat-menu-item (click)="filterProducts('none')">None</button>
+    <button mat-menu-item (click)="filterProducts('lowToHigh')">Price: Low to High</button>
+    <button mat-menu-item (click)="filterProducts('highToLow')">Price: High to Low</button>
+  </mat-menu>
+
   <mat-grid-list cols="4" rowHeight="4:7" gutterSize="16" class="product-grid">
     <mat-grid-tile *ngFor="let p of productDetails" class="product-tile">
       <div class="product-card" (click)="showProductDetails(p.productId)">

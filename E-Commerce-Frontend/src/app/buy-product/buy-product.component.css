@@ -1,0 +1,75 @@
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+}
+
+.card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 30px;
+    background-color: #fff;
+    transition: box-shadow 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.mat-form-field {
+    margin-bottom: 20px;
+}
+
+.table {
+    margin-top: 30px;
+}
+
+.thead {
+    background-color: #f8f9fa;
+}
+
+.thead th {
+    border-top: none;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.custom-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.custom-button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    .col-12, .col-md-6 {
+        padding: 0;
+    }
+    .card {
+        padding: 15px;
+    }
+    .table {
+        font-size: 14px;
+    }
+}

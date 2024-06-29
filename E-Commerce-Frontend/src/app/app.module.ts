@@ -38,6 +38,8 @@ import { OrderConfirmationComponent } from './order-confirmation/order-confirmat
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -78,6 +80,8 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
     MatTableModule,
     MatCardModule,
     MatDialogModule,
+    MatMenuModule,
+    MatPaginator
   ],
   providers: [
     AuthGuard,

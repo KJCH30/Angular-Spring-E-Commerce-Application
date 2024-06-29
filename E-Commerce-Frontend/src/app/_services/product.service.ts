@@ -48,9 +48,10 @@ export class ProductService {
     return this.httpClient.delete(`http://localhost:9090/deleteCartItem/${cartId}`);
   }
 
-  public getOrderDetails(): Observable<MyOrderDetails[]>{
-    return this.httpClient.get<MyOrderDetails[]>("http://localhost:9090/getOrderDetails")
-  }
+  public getOrderDetails(page: number, size: number): Observable<MyOrderDetails[]> {
+    return this.httpClient.get<MyOrderDetails[]>(`http://localhost:9090/getOrderDetails?page=${page}&size=${size}`);
+}
+
   public createTransaction(amount : number){
     return this.httpClient.get("http://localhost:9090/createTransaction/"+ amount)
   }

@@ -102,4 +102,17 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // Filter products based on selection
+  filterProducts(filter: string) {
+    if (filter === 'none') {
+      // Reset to default state
+      this.pageNumber = 0;
+      this.productDetails = [];
+      this.getAllProducts();
+    } else if (filter === 'lowToHigh') {
+      this.productDetails.sort((a, b) => a.productDiscountedPrice - b.productDiscountedPrice);
+    } else if (filter === 'highToLow') {
+      this.productDetails.sort((a, b) => b.productDiscountedPrice - a.productDiscountedPrice);
+    }
+  }
 }

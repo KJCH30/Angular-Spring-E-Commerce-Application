@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../_services/product.service';
 import { error } from 'console';
 import { MyOrderDetails } from '../_model/all-orders.model';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-my-orders',
@@ -11,21 +12,31 @@ import { MyOrderDetails } from '../_model/all-orders.model';
 export class MyOrdersComponent implements OnInit {
   displayedColumns = ["Name", "Address", "Contact Number", "Amount Paid", "Status"]
   myOrderDetails: MyOrderDetails[] = []
+  pageIndex: number = 0;
+  pageSize: number = 10;
+  length: number = 0;
 
   constructor(private productService: ProductService){}
   ngOnInit(): void {
     this.getMyOrders()
   }
 
-  getMyOrders(){
-    this.productService.getOrderDetails().subscribe({
+  getMyOrders(): void {
+    this.productService.getOrderDetails(this.pageIndex, this.pageSize).subscribe({
       next: (resp: MyOrderDetails[]) => {
         console.log(resp);
-        this.myOrderDetails = resp
+        this.myOrderDetails = resp;
+        this.length = this.myOrderDetails.length; // Update length for paginator
       },
-      error: (error)=>{
+      error: (error) => {
         console.log(error);
       }
-    })
+    });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.getMyOrders();
   }
 }
