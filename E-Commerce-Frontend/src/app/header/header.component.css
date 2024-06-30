@@ -17,7 +17,7 @@
 }
 
 .styled-text:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .login-button,
