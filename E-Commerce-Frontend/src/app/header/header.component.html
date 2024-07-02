@@ -17,4 +17,5 @@
   <button *ngIf="isUser()" mat-raised-button class="nav-button" routerLink="/myOrders">Show My Orders</button>
   <button *ngIf="isVendor() || isAdmin()" mat-raised-button class="nav-button" routerLink="/addNewProduct">Add New Product</button>
   <button *ngIf="isVendor() || isAdmin()" mat-raised-button class="nav-button" routerLink="/showAddedProducts">Show Added Products</button>
+  <button *ngIf="isAdmin()" mat-raised-button class="nav-button" routerLink="/orderInfo">Order Information</button>
 </mat-toolbar>

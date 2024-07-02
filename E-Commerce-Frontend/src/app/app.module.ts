@@ -40,6 +40,7 @@ import { CartComponent } from './cart/cart.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import { MatPaginator } from '@angular/material/paginator';
     RegisterComponent,
     CartComponent,
     MyOrdersComponent,
+    OrderDetailsComponent,
   ],
   imports: [
     BrowserModule,
