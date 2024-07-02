@@ -69,6 +69,14 @@ public class OrderDetailService {
         }
     }
 
+    public void markOrderAsDelivered(Integer orderId){
+        OrderDetail orderDetail = orderDetailDao.findById(orderId).get();
+        if (orderDetail != null){
+            orderDetail.setOrderStatus("Delivered");
+            orderDetailDao.save(orderDetail);
+        }
+    }
+
     public List<OrderDetail> getOrderDetails(int page, int size){
         String currentUser = JwtRequestFilter.CURRENT_USER;
         User user = userDao.findById(currentUser).orElse(null);

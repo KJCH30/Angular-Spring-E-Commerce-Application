@@ -41,4 +41,10 @@ public class OrderDetailController {
     public List<OrderDetail> getAllOrderDetails(){
         return orderDetailService.getAllOrderDetails();
     }
+
+    @PreAuthorize("hasRole('Admin')")
+    @GetMapping({"/markOrderAsDelivered/{orderId}"})
+    public void markOrderAsDelivered(@PathVariable(name = "orderId") Integer orderId){
+        orderDetailService.markOrderAsDelivered(orderId);
+    }
 }
