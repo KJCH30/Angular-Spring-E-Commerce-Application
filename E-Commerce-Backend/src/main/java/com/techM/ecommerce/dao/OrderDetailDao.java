@@ -10,5 +10,8 @@ import java.util.List;
 
 @Repository
 public interface OrderDetailDao extends CrudRepository<OrderDetail, Integer> {
-    List<OrderDetail> findByUser(User user, Pageable pageable);
+    public List<OrderDetail> findByUser(User user, Pageable pageable);
+
+    public List<OrderDetail> findByOrderStatus(String status);
+
 }

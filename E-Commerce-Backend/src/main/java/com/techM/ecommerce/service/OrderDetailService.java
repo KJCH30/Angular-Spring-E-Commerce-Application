@@ -35,11 +35,19 @@ public class OrderDetailService {
     @Autowired
     private CartDao cartDao;
 
-    public List<OrderDetail> getAllOrderDetails(){
+    public List<OrderDetail> getAllOrderDetails(String status){
         List<OrderDetail> orderDetails = new ArrayList<>();
-        orderDetailDao.findAll().forEach(
-                order -> orderDetails.add(order)
-        );
+
+        if (status.equals("All")){
+            orderDetailDao.findAll().forEach(
+                    order -> orderDetails.add(order)
+            );
+        }else{
+            orderDetailDao.findByOrderStatus(status).forEach(
+                    order -> orderDetails.add(order)
+            );
+        }
+
         return orderDetails;
     }
     public void placeOrder(OrderInput orderInput, boolean isSingleProductCheckout){
