@@ -25,15 +25,16 @@ export class OrderDetailsComponent implements OnInit {
   displayedColumns: string[] = ['Id', 'Product Name', 'Name', 'Address', 'Contact No.', 'Status', 'Action'];
   dataSource = [];
   tickStates : any = {};
+  status: string = 'All';
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.getAllOrderDetailsForAdmin();
+    this.getAllOrderDetailsForAdmin(this.status);
   }
 
-  getAllOrderDetailsForAdmin(): void {
-    this.productService.getAllOrderDetailsForAdmin().subscribe({
+  getAllOrderDetailsForAdmin(statusParam : string): void {
+    this.productService.getAllOrderDetailsForAdmin(statusParam).subscribe({
       next: (response: any) => {
         this.dataSource = response;
         response.forEach((order: any) => {
@@ -52,7 +53,7 @@ export class OrderDetailsComponent implements OnInit {
         console.log(response)
         this.tickStates[orderId] = 'delivered';
         setTimeout(() => {
-          this.getAllOrderDetailsForAdmin();
+          this.getAllOrderDetailsForAdmin(this.status);
         }, 500);
       },
       error: (error) => {

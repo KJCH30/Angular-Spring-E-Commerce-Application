@@ -41,6 +41,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     MatCardModule,
     MatDialogModule,
     MatMenuModule,
-    MatPaginator
+    MatPaginator,
+    MatButtonToggleModule
   ],
   providers: [
     AuthGuard,
