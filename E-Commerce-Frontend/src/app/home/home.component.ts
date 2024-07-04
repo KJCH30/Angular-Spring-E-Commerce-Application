@@ -8,6 +8,7 @@ import { ImageProcessingService } from '../_services/image-processing.service';
 import { Router } from '@angular/router';
 import { CartService } from '../cart.service';
 import { WishlistService } from '../wishlist.service';
+import { UserAuthService } from '../_services/user-auth.service';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,8 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private snackBar: MatSnackBar,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private userAuthService: UserAuthService
 
   ) { }
   ngOnInit(): void {
@@ -39,41 +41,50 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (resp: Product[]) => {
           console.log(resp);
-  
+
           // Check if the response length matches the page size to decide whether to show the load button
           this.showLoadButton = resp.length == 8;
-  
-          // Fetch wishlist details once
-          this.productService.getWishlistDetails().subscribe({
-            next: (wishlistItems: any[]) => {
-              // Create a map of productId to wishlistId for quick lookup
-              const wishlistMap = new Map<number, any>();
-              wishlistItems.forEach(item => {
-                wishlistMap.set(item.product.productId, item.wishlistId);
-              });
-  
-              // Update the product details with wishlist information
-              resp.forEach(product => {
-                if (wishlistMap.has(product.productId)) {
-                  product.isWishlisted = true;
-                  product.wishlistId = wishlistMap.get(product.productId);
-                } else {
-                  product.isWishlisted = false;
-                  product.wishlistId = 0;
-                }
-                this.productDetails.push(product);
-              });
-            },
-            error: (error) => {
-              console.log(error);
-            }
-          });
+
+          if (this.userAuthService.isLoggedIn() && this.userAuthService.isUser()) {
+            // Fetch wishlist details only if the user is logged in
+            this.productService.getWishlistDetails().subscribe({
+              next: (wishlistItems: any[]) => {
+                // Create a map of productId to wishlistId for quick lookup
+                const wishlistMap = new Map<number, any>();
+                wishlistItems.forEach(item => {
+                  wishlistMap.set(item.product.productId, item.wishlistId);
+                });
+
+                // Update the product details with wishlist information
+                resp.forEach(product => {
+                  if (wishlistMap.has(product.productId)) {
+                    product.isWishlisted = true;
+                    product.wishlistId = wishlistMap.get(product.productId);
+                  } else {
+                    product.isWishlisted = false;
+                    product.wishlistId = 0;
+                  }
+                  this.productDetails.push(product);
+                });
+              },
+              error: (error) => {
+                console.log(error);
+              }
+            });
+          } else {
+            resp.forEach(product => {
+              product.isWishlisted = false;
+              product.wishlistId = 0;
+              this.productDetails.push(product);
+            });
+          }
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
         }
       });
   }
+
   
 
   public showProductDetails(productId: any, event?: Event) {
@@ -159,6 +170,8 @@ export class HomeComponent implements OnInit {
       this.productDetails.sort((a, b) => b.productDiscountedPrice - a.productDiscountedPrice);
     }
   }
-
+  public isUser() {
+    return this.userAuthService.isUser();
+  }
   
 }

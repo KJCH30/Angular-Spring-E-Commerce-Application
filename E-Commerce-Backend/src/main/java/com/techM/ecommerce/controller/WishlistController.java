@@ -30,7 +30,7 @@ public class WishlistController {
 
     @PreAuthorize("hasRole('User')")
     @GetMapping({"/getWishlistDetails"})
-    public List<Wishlist> getCardDetails(){
+    public List<Wishlist> getWishlistDetails(){
         return wishlistService.getWishlistDetails();
     }
 
