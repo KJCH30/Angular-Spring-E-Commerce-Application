@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
   pageNumber: number = 0
   productDetails: Product[] = [];
   showLoadButton = false;
+  allProductDetails: Product[] = [];
+
 
   constructor(private productService: ProductService,
     private imageProcessingService: ImageProcessingService,
@@ -35,57 +37,58 @@ export class HomeComponent implements OnInit {
 
   public getAllProducts(searchKey: string = "") {
     this.productService.getAllProducts(this.pageNumber, searchKey)
-      .pipe(
-        map((x: Product[], i: any) => x.map((product: Product) => this.imageProcessingService.createImages(product)))
-      )
-      .subscribe({
-        next: (resp: Product[]) => {
-          console.log(resp);
+        .pipe(
+            map((x: Product[], i: any) => x.map((product: Product) => this.imageProcessingService.createImages(product)))
+        )
+        .subscribe({
+            next: (resp: Product[]) => {
+                console.log(resp);
 
-          // Check if the response length matches the page size to decide whether to show the load button
-          this.showLoadButton = resp.length == 8;
+                // Check if the response length matches the page size to decide whether to show the load button
+                this.showLoadButton = resp.length == 8;
 
-          if (this.userAuthService.isLoggedIn() && this.userAuthService.isUser()) {
-            // Fetch wishlist details only if the user is logged in
-            this.productService.getWishlistDetails().subscribe({
-              next: (wishlistItems: any[]) => {
-                // Create a map of productId to wishlistId for quick lookup
-                const wishlistMap = new Map<number, any>();
-                wishlistItems.forEach(item => {
-                  wishlistMap.set(item.product.productId, item.wishlistId);
-                });
+                if (this.userAuthService.isLoggedIn() && this.userAuthService.isUser()) {
+                    // Fetch wishlist details only if the user is logged in
+                    this.productService.getWishlistDetails().subscribe({
+                        next: (wishlistItems: any[]) => {
+                            // Create a map of productId to wishlistId for quick lookup
+                            const wishlistMap = new Map<number, any>();
+                            wishlistItems.forEach(item => {
+                                wishlistMap.set(item.product.productId, item.wishlistId);
+                            });
 
-                // Update the product details with wishlist information
-                resp.forEach(product => {
-                  if (wishlistMap.has(product.productId)) {
-                    product.isWishlisted = true;
-                    product.wishlistId = wishlistMap.get(product.productId);
-                  } else {
-                    product.isWishlisted = false;
-                    product.wishlistId = 0;
-                  }
-                  this.productDetails.push(product);
-                });
-              },
-              error: (error) => {
+                            // Update the product details with wishlist information
+                            resp.forEach(product => {
+                                if (wishlistMap.has(product.productId)) {
+                                    product.isWishlisted = true;
+                                    product.wishlistId = wishlistMap.get(product.productId);
+                                } else {
+                                    product.isWishlisted = false;
+                                    product.wishlistId = 0;
+                                }
+                                this.allProductDetails.push(product);
+                                this.productDetails.push(product);
+                            });
+                        },
+                        error: (error) => {
+                            console.log(error);
+                        }
+                    });
+                } else {
+                    resp.forEach(product => {
+                        product.isWishlisted = false;
+                        product.wishlistId = 0;
+                        this.allProductDetails.push(product);
+                        this.productDetails.push(product);
+                    });
+                }
+            },
+            error: (error: HttpErrorResponse) => {
                 console.log(error);
-              }
-            });
-          } else {
-            resp.forEach(product => {
-              product.isWishlisted = false;
-              product.wishlistId = 0;
-              this.productDetails.push(product);
-            });
-          }
-        },
-        error: (error: HttpErrorResponse) => {
-          console.log(error);
-        }
-      });
-  }
+            }
+        });
+}
 
-  
 
   public showProductDetails(productId: any, event?: Event) {
     if (event) {
@@ -158,18 +161,26 @@ export class HomeComponent implements OnInit {
   }
 
   // Filter products based on selection
-  filterProducts(filter: string) {
+  public filterProducts(filter: string) {
     if (filter === 'none') {
-      // Reset to default state
-      this.pageNumber = 0;
-      this.productDetails = [];
-      this.getAllProducts();
+        this.productDetails = [...this.allProductDetails];
     } else if (filter === 'lowToHigh') {
-      this.productDetails.sort((a, b) => a.productDiscountedPrice - b.productDiscountedPrice);
+        this.productDetails = [...this.allProductDetails].sort((a, b) => a.productDiscountedPrice - b.productDiscountedPrice);
     } else if (filter === 'highToLow') {
-      this.productDetails.sort((a, b) => b.productDiscountedPrice - a.productDiscountedPrice);
+        this.productDetails = [...this.allProductDetails].sort((a, b) => b.productDiscountedPrice - a.productDiscountedPrice);
+    } else if (filter === 'below10000') {
+        this.productDetails = this.allProductDetails.filter(product => product.productDiscountedPrice < 10000);
+    } else if (filter === 'between10000And20000') {
+        this.productDetails = this.allProductDetails.filter(product => product.productDiscountedPrice >= 10000 && product.productDiscountedPrice <= 20000);
+    } else if (filter === 'between20000And30000') {
+        this.productDetails = this.allProductDetails.filter(product => product.productDiscountedPrice >= 20000 && product.productDiscountedPrice <= 30000);
+    } else if (filter === 'above30000') {
+        this.productDetails = this.allProductDetails.filter(product => product.productDiscountedPrice > 30000);
     }
-  }
+}
+
+
+  
   public isUser() {
     return this.userAuthService.isUser();
   }

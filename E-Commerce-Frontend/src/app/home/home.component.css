@@ -9,7 +9,6 @@
   margin-bottom: 20px;
   border-radius: 50px;
   padding: 0 10px;
-  box-shadow: none;
   display: inline-block;
   vertical-align: middle;
 }
@@ -19,7 +18,7 @@
   margin-bottom: 20px;
   border-radius: 50px;
   padding: 10px 15px;
-  background-color: #e9a52f; /* Custom color */
+  background-color: #00bfa5; /* Teal color */
   color: white;
   display: inline-block;
   vertical-align: middle;
@@ -30,7 +29,7 @@
 }
 
 .filter-button:hover {
-  background-color: #e4e95d; /* Custom hover color */
+  background-color: #ff6f61; /* Coral color */
 }
 
 .mat-form-field-outline {
@@ -38,7 +37,7 @@
 }
 
 .mat-icon {
-  color: #6a11cb;
+  color: #0b0698;
 }
 
 .filter-button-container {
@@ -50,6 +49,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 16px; /* Ensure even spacing between tiles */
 }
 
 .product-card {
@@ -61,6 +61,8 @@
   background-color: #ffffff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  width: 300px; /* Set fixed width */
+  height: 500px; /* Set fixed height */
 }
 
 .product-card:hover {
@@ -98,6 +100,10 @@
 
 .product-info {
   padding: 15px;
+  height: 250px; /* Ensure consistent height for info section */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .tick-mark {
@@ -112,13 +118,6 @@
   color: #2c3e50;
 }
 
-.product-description {
-  color: #666;
-  font-size: 0.9rem;
-  height: 50px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .price-container {
   display: flex;
@@ -128,7 +127,7 @@
 
 .discounted-price {
   font-size: 1.1rem;
-  color: #6a11cb;
+  color: #2575fc; /* Match header color */
   font-weight: bold;
 }
 
@@ -148,26 +147,48 @@
 .details-button {
   flex: 1;
   margin-right: 5px;
-  background-color: #e9a52f !important;
+  background-color: #00bfa5 !important; /* Teal color */
   color: #ffffff !important;
   width: 100px; /* Set fixed width */
   border-radius: 7px !important; /* Less rounded corners */
 }
 
 .details-button:hover {
-  background-color: #e4e95d !important;
+  background-color: #ff6f61 !important; /* Coral color */
 }
 
 .cart-button {
   flex: 1;
-  background-color: #e4e95d !important;
+  background-color: #00bfa5 !important; /* Teal color */
   color: #ffffff !important;
   width: 100px; /* Set fixed width */
   border-radius: 7px !important; /* Less rounded corners */
 }
 
 .cart-button:hover {
-  background-color: #4eea58 !important;
+  background-color: #ff6f61 !important; /* Coral color */
+}
+
+.product-description-container {
+  height: 50px; /* Ensure consistent height for the description container */
+  overflow: auto; /* Hide overflowing text */
+  position: relative;
+}
+
+.product-description {
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+  animation: scrollDescription 20s linear infinite; /* Adjust the duration if needed */
+}
+
+@keyframes scrollDescription {
+  0% {
+    top: 50px; /* Start below the container */
+  }
+  100% {
+    top: -500px; /* Move above the container */
+  }
 }
 
 /* Responsive Styles */
@@ -219,6 +240,7 @@
     width: 100%;
     margin-bottom: 20px;
   }
+  
   .filter-button-container {
     margin-bottom: 20px;
   }
