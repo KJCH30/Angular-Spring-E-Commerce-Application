@@ -21,6 +21,10 @@ export class UserService {
     return this.httpclient.post(this.PATH_OF_API + "/registerNewUser", registerData)
   }
 
+  public registerVendor(registerData: any){
+    return this.httpclient.post(this.PATH_OF_API + "/registerNewVendor", registerData)
+  }
+
   public login(loginData : any){
     return this.httpclient.post(this.PATH_OF_API+"/authenticate",loginData, {headers: this.requestHeader});
   }

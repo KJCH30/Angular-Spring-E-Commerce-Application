@@ -19,6 +19,7 @@ import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import { RegisterVendorComponent } from './register-vendor/register-vendor.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -59,6 +60,10 @@ const routes: Routes = [
   {
     path: "register",
     component: RegisterComponent
+  },
+  {
+    path: "registerVendor",
+    component: RegisterVendorComponent
   },
   { path: 'orderInfo', component: OrderDetailsComponent,
     canActivate: [AuthGuard], data: {roles: ["Admin"]}

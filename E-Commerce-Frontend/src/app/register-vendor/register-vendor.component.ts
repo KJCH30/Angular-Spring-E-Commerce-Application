@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { UserService } from '../_services/user.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-register-vendor',
+  templateUrl: './register-vendor.component.html',
+  styleUrl: './register-vendor.component.css'
 })
-export class RegisterComponent {
+export class RegisterVendorComponent {
   hide = true;
 
   constructor(private userService: UserService, private router: Router) {}
@@ -18,7 +18,7 @@ export class RegisterComponent {
     this.hide = !this.hide;
   }
 
-  register(registerForm: NgForm) {
+  registerVendor(registerForm: NgForm) {
     if (registerForm.invalid) {
       return;
     }
@@ -28,7 +28,7 @@ export class RegisterComponent {
       return;
     }
 
-    this.userService.register(registerForm.value).subscribe({
+    this.userService.registerVendor(registerForm.value).subscribe({
       next: (response) => {
         this.router.navigate(['/login']);
       },

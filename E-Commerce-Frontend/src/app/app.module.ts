@@ -18,7 +18,7 @@ import { UserService } from './_services/user.service';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatError, MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconButton } from '@angular/material/button';
@@ -42,6 +42,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { RegisterVendorComponent } from './register-vendor/register-vendor.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     CartComponent,
     MyOrdersComponent,
     OrderDetailsComponent,
+    RegisterVendorComponent,
   ],
   imports: [
     BrowserModule,
