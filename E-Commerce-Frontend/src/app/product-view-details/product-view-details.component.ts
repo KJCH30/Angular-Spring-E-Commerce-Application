@@ -3,6 +3,7 @@ import { Product } from '../_model/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../_services/product.service';
 import { CartService } from '../cart.service';
+import { UserAuthService } from '../_services/user-auth.service';
 
 @Component({
   selector: 'app-product-view-details',
@@ -18,7 +19,8 @@ export class ProductViewDetailsComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private userAuthService: UserAuthService
   ) { }
   ngOnInit(): void {
     this.product = this.activatedRoute.snapshot.data['product']
@@ -57,11 +59,16 @@ export class ProductViewDetailsComponent implements OnInit {
   }
 
   buyProduct(productId: any) {
-    this.router.navigate(['/buyProduct'], {
-      queryParams: {
-        isSingleProductCheckout: true,
-        id: productId
-      }
-    });
+    if(this.userAuthService.isUser()){
+      this.router.navigate(['/buyProduct'], {
+        queryParams: {
+          isSingleProductCheckout: true,
+          id: productId
+        }
+      });
+    }
+    else{
+      this.router.navigate(['/login']);
+    }
   }
 }

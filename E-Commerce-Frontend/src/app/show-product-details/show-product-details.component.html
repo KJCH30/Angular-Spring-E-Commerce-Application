@@ -60,7 +60,7 @@
           <button mat-icon-button color="accent" (click)="editProductDetails(element.productId)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="deleteProduct(element.productId)">
+          <button *ngIf="isAdmin()" mat-icon-button color="warn" (click)="deleteProduct(element.productId)">
             <mat-icon class="icon-red" style="color: red;">delete</mat-icon>
           </button>
         </td>

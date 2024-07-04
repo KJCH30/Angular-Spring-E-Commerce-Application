@@ -7,6 +7,7 @@ import { ShowProductImagesDialogComponent } from '../show-product-images-dialog/
 import { ImageProcessingService } from '../_services/image-processing.service';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
+import { UserAuthService } from '../_services/user-auth.service';
 
 @Component({
   selector: 'app-show-product-details',
@@ -24,7 +25,8 @@ export class ShowProductDetailsComponent implements OnInit {
   constructor(private productService: ProductService,
     public imagesDialog: MatDialog,
     private imageProcessingService: ImageProcessingService,
-    private router: Router
+    private router: Router,
+    private userAuthService: UserAuthService
   ) { }
 
   ngOnInit(): void {
@@ -99,5 +101,9 @@ export class ShowProductDetailsComponent implements OnInit {
 
   toggleDescription(element: any) {
     element.showFullDescription = !element.showFullDescription;
+  }
+
+  public isAdmin() {
+    return this.userAuthService.isAdmin();
   }
 }
