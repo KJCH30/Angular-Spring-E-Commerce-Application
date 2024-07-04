@@ -48,6 +48,24 @@ export class ProductService {
     return this.httpClient.delete(`http://localhost:9090/deleteCartItem/${cartId}`);
   }
 
+  public addToWishlist(productId : number){
+    return this.httpClient.get("http://localhost:9090/addToWishlist/"+productId)
+  }
+
+  public getWishlistDetails(): Observable<any[]> {
+    return this.httpClient.get<any[]>("http://localhost:9090/getWishlistDetails");
+  }
+  
+
+  public deleteWishlistItem(wishlistId: number){
+    return this.httpClient.delete(`http://localhost:9090/deleteWishlistItem/${wishlistId}`);
+  }
+
+  public isProductInWishlist(productId: number): Observable<boolean> {
+    return this.httpClient.get<boolean>(`http://localhost:9090/isProductInWishlist/${productId}`);
+  }
+  
+
   public getOrderDetails(page: number, size: number): Observable<MyOrderDetails[]> {
     return this.httpClient.get<MyOrderDetails[]>(`http://localhost:9090/getOrderDetails?page=${page}&size=${size}`);
 }

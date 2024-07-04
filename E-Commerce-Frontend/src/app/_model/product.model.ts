@@ -9,5 +9,6 @@ export interface Product{
     productImages: ImageHandle[]
     isWishlisted?: boolean;
     isAddedToCart?: boolean;
-    
+    wishlistId?: number; // Add this line
+
 }

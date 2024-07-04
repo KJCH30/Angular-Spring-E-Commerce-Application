@@ -25,9 +25,9 @@
       <div class="product-card" (click)="showProductDetails(p.productId)">
         <div class="image-container">
           <img class="home-page-product-image" [src]="p.productImages[0].url" alt="">
-          <!-- <button mat-icon-button class="wishlist-button" [ngClass]="{'wishlisted': p.isWishlisted}" (click)="toggleWishlist(p, $event)">
+          <button mat-icon-button class="wishlist-button" [ngClass]="{'wishlisted': p.isWishlisted}" (click)="toggleWishlist(p, p.productId, $event)">
             <mat-icon>favorite_border</mat-icon>
-          </button> -->
+          </button>
         </div>
         <div class="product-info">
           <p class="product-name"><b>{{p.productName}}</b></p>

@@ -7,6 +7,7 @@ import { Product } from '../_model/product.model';
 import { ImageProcessingService } from '../_services/image-processing.service';
 import { Router } from '@angular/router';
 import { CartService } from '../cart.service';
+import { WishlistService } from '../wishlist.service';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private cartService: CartService,
     private snackBar: MatSnackBar,
+    private wishlistService: WishlistService
 
   ) { }
   ngOnInit(): void {
@@ -37,20 +39,42 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (resp: Product[]) => {
           console.log(resp);
-          if (resp.length == 8) {
-            this.showLoadButton = true
-          } else {
-            this.showLoadButton = false
-          }
-          resp.forEach(p => this.productDetails.push(p))
+  
+          // Check if the response length matches the page size to decide whether to show the load button
+          this.showLoadButton = resp.length == 8;
+  
+          // Fetch wishlist details once
+          this.productService.getWishlistDetails().subscribe({
+            next: (wishlistItems: any[]) => {
+              // Create a map of productId to wishlistId for quick lookup
+              const wishlistMap = new Map<number, any>();
+              wishlistItems.forEach(item => {
+                wishlistMap.set(item.product.productId, item.wishlistId);
+              });
+  
+              // Update the product details with wishlist information
+              resp.forEach(product => {
+                if (wishlistMap.has(product.productId)) {
+                  product.isWishlisted = true;
+                  product.wishlistId = wishlistMap.get(product.productId);
+                } else {
+                  product.isWishlisted = false;
+                  product.wishlistId = 0;
+                }
+                this.productDetails.push(product);
+              });
+            },
+            error: (error) => {
+              console.log(error);
+            }
+          });
         },
         error: (error: HttpErrorResponse) => {
           console.log(error);
         }
-      }
-
-      )
+      });
   }
+  
 
   public showProductDetails(productId: any, event?: Event) {
     if (event) {
@@ -91,14 +115,34 @@ export class HomeComponent implements OnInit {
   }
 
   // Toggle Wishlist Method
-  toggleWishlist(product: any, event: Event) {
-    event.stopPropagation(); // Prevents the click from propagating to the card
-    product.isWishlisted = !product.isWishlisted; // Toggle wishlist status
-    // Optionally, add/remove product from wishlist in backend
+  toggleWishlist(product: any, productId: number, event: Event) {
+    event.stopPropagation();
     if (product.isWishlisted) {
-      this.snackBar.open('Product added to wishlist', 'Close', { duration: 2000 });
+      this.productService.deleteWishlistItem(product.wishlistId).subscribe({
+        next: (response) => {
+          console.log(response);
+          this.wishlistService.decrementWishlistCount();
+          product.isWishlisted = false;
+          product.wishlistId = null;
+          this.snackBar.open('Product removed from wishlist', 'Close', { duration: 2000 });
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
     } else {
-      this.snackBar.open('Product removed from wishlist', 'Close', { duration: 2000 });
+      this.productService.addToWishlist(productId).subscribe({
+        next: (response: any) => {
+          console.log(response);
+          this.wishlistService.incrementWishlistCount();
+          product.isWishlisted = true;
+          product.wishlistId = response.wishlistId; // Store the returned wishlistId
+          this.snackBar.open('Product added to wishlist', 'Close', { duration: 2000 });
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
     }
   }
 
@@ -115,4 +159,6 @@ export class HomeComponent implements OnInit {
       this.productDetails.sort((a, b) => b.productDiscountedPrice - a.productDiscountedPrice);
     }
   }
+
+  
 }

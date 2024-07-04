@@ -13,6 +13,10 @@
     <mat-icon>shopping_cart</mat-icon>
     <span class="cart-count">{{ cartCount }}</span>
   </button>
+  <button *ngIf="isUser()" mat-icon-button class="nav-button cart-button" routerLink="/wishlist">
+    <mat-icon>favorite</mat-icon>
+    <span class="wishlist-count">{{ wishlistCount }}</span>
+  </button>
   <span class="spacer"></span>
   <button *ngIf="isUser()" mat-raised-button class="nav-button" routerLink="/myOrders">Show My Orders</button>
   <button *ngIf="isVendor() || isAdmin()" mat-raised-button class="nav-button" routerLink="/addNewProduct">Add New Product</button>

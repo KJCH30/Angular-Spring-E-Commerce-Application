@@ -43,6 +43,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { RegisterVendorComponent } from './register-vendor/register-vendor.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { RegisterVendorComponent } from './register-vendor/register-vendor.compo
     MyOrdersComponent,
     OrderDetailsComponent,
     RegisterVendorComponent,
+    WishlistComponent,
   ],
   imports: [
     BrowserModule,
