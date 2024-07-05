@@ -44,6 +44,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { RegisterVendorComponent } from './register-vendor/register-vendor.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
 
 
 @NgModule({
@@ -89,7 +91,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     MatDialogModule,
     MatMenuModule,
     MatPaginator,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    MatPaginatorModule
   ],
   providers: [
     AuthGuard,
