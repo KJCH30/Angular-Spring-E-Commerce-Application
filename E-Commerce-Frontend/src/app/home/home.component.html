@@ -27,7 +27,7 @@
 
   <mat-grid-list cols="4" rowHeight="4:7" gutterSize="16" class="product-grid">
     <mat-grid-tile *ngFor="let p of productDetails" class="product-tile">
-      <div class="product-card" (click)="showProductDetails(p.productId)">
+      <div class="product-card" (click)="showProductDetails(p.productId)" (mouseenter)="restartAnimation($event)">
         <div class="image-container">
           <img class="home-page-product-image" [src]="p.productImages[0].url" alt="">
           <button *ngIf="isUser()" mat-icon-button class="wishlist-button" [ngClass]="{'wishlisted': p.isWishlisted}" (click)="toggleWishlist(p, p.productId, $event)">

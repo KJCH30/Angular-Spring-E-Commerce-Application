@@ -171,7 +171,7 @@
 
 .product-description-container {
   height: 50px; /* Ensure consistent height for the description container */
-  overflow: auto; /* Hide overflowing text */
+  overflow: hidden; /* Hide overflowing text */
   position: relative;
 }
 
@@ -190,6 +190,7 @@
     top: -500px; /* Move above the container */
   }
 }
+
 
 /* Responsive Styles */
 

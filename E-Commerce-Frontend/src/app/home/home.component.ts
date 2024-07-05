@@ -185,4 +185,13 @@ export class HomeComponent implements OnInit {
     return this.userAuthService.isUser();
   }
   
+  restartAnimation(event: Event) {
+    const descriptionElement = (event.currentTarget as HTMLElement).querySelector('.product-description') as HTMLElement;
+    if (descriptionElement) {
+      descriptionElement.style.animation = 'none';
+      // Force reflow
+      descriptionElement.offsetHeight; // Reading this property will force a reflow
+      descriptionElement.style.animation = '';
+    }
+  }
 }
