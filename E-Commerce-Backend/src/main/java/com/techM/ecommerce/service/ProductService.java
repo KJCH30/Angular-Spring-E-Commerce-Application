@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,17 +32,53 @@ public class ProductService {
         return productDao.save(product);
     }
 
-    public List<Product> getAllProducts(int pageNumber, String searchKey){
-        Pageable pageable = PageRequest.of(pageNumber, 8);
-
-        if (searchKey.equals("")){
-            return (List<Product>) productDao.findAll(pageable);
-        }else{
-            return productDao.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCase(
-                    searchKey, searchKey, pageable
-            );
+    public List<Product> getAllProducts(int pageNumber, String searchKey, String filter) {
+        if (filter != null && !filter.equals("none")) {
+            List<Product> allProducts;
+            if (searchKey.equals("")) {
+                allProducts = applyPriceFilter(filter);
+            } else {
+                allProducts = applyPriceFilter(filter, searchKey);
+            }
+            return allProducts;
+        } else {
+            Pageable pageable = PageRequest.of(pageNumber, 8);
+            return searchKey.equals("") ?
+                    (List<Product>) productDao.findAll(pageable) :
+                    productDao.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCase(searchKey, searchKey, pageable);
         }
     }
+
+    private List<Product> applyPriceFilter(String filter) {
+        switch (filter) {
+            case "below10000":
+                return productDao.findByProductDiscountedPriceLessThan(10000);
+            case "between10000And20000":
+                return productDao.findByProductDiscountedPriceBetween(10000, 20000);
+            case "between20000And30000":
+                return productDao.findByProductDiscountedPriceBetween(20000, 30000);
+            case "above30000":
+                return productDao.findByProductDiscountedPriceGreaterThan(30000);
+            default:
+                return (List<Product>) productDao.findAll();
+        }
+    }
+
+    private List<Product> applyPriceFilter(String filter, String searchKey) {
+        switch (filter) {
+            case "below10000":
+                return productDao.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCaseAndProductDiscountedPriceLessThan(searchKey, searchKey, 10000);
+            case "between10000And20000":
+                return productDao.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCaseAndProductDiscountedPriceBetween(searchKey, searchKey, 10000, 20000);
+            case "between20000And30000":
+                return productDao.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCaseAndProductDiscountedPriceBetween(searchKey, searchKey, 20000, 30000);
+            case "above30000":
+                return productDao.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCaseAndProductDiscountedPriceGreaterThan(searchKey, searchKey, 30000);
+            default:
+                return productDao.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCase(searchKey, searchKey);
+        }
+    }
+
 
     public void deleteProductDetails(Integer productId){
         productDao.deleteById(productId);

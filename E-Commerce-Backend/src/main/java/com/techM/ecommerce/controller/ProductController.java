@@ -48,10 +48,11 @@ public class ProductController {
         }
         return imageModels;
     }
-    @GetMapping({"/getAllProducts"})
+    @GetMapping("/getAllProducts")
     public List<Product> getAllProducts(@RequestParam(defaultValue = "0") int pageNumber,
-                                        @RequestParam(defaultValue = "") String searchKey){
-        return productService.getAllProducts(pageNumber, searchKey);
+                                        @RequestParam(defaultValue = "") String searchKey,
+                                        @RequestParam(defaultValue = "none") String filter) {
+        return productService.getAllProducts(pageNumber, searchKey, filter);
     }
 
     @GetMapping({"/getProductDetailsById/{productId}"})
