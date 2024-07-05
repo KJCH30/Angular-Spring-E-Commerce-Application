@@ -89,7 +89,7 @@ public class OrderDetailService {
         String currentUser = JwtRequestFilter.CURRENT_USER;
         User user = userDao.findById(currentUser).orElse(null);
         Pageable pageable = PageRequest.of(page, size);
-        return orderDetailDao.findByUser(user, pageable);
+        return orderDetailDao.findByUser(user, pageable).getContent();
     }
 
 
