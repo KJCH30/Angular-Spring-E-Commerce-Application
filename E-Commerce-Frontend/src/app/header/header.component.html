@@ -1,8 +1,14 @@
 <mat-toolbar color="primary" class="bg-navbar">
-  <a routerLink="/" class="styled-text">Simply-Cart</a>
+  <a routerLink="/" class="styled-text">
+    <img src="https://i.pinimg.com/originals/a0/7e/64/a07e64a679218ec421cc5c0c3b5894e5.jpg" class="logo"> Simply-Cart
+  </a>
   <span class="spacer"></span>
-  <button *ngIf="!isLoggedIn()" routerLink="/login" routerLinkActive="active" mat-raised-button class="login-button">Login</button>
-  <button *ngIf="isLoggedIn()" (click)="logout()" mat-raised-button class="logout-button">Logout</button>
+  <button *ngIf="!isLoggedIn()" routerLink="/login" routerLinkActive="active" mat-raised-button class="login-button">
+    <mat-icon>login</mat-icon> Login
+  </button>
+  <button *ngIf="isLoggedIn()" (click)="logout()" mat-raised-button class="logout-button">
+    <mat-icon>logout</mat-icon> Logout
+  </button>
 </mat-toolbar>
 
 <mat-toolbar color="primary" *ngIf="isLoggedIn()" class="bg-navbar">
