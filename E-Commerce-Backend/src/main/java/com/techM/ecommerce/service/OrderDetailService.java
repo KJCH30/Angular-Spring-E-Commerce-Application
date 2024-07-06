@@ -10,13 +10,16 @@ import com.techM.ecommerce.dao.UserDao;
 import com.techM.ecommerce.entity.*;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class OrderDetailService {
@@ -85,11 +88,16 @@ public class OrderDetailService {
         }
     }
 
-    public List<OrderDetail> getOrderDetails(int page, int size){
+    public Map<String, Object> getOrderDetails(int page, int size) {
         String currentUser = JwtRequestFilter.CURRENT_USER;
         User user = userDao.findById(currentUser).orElse(null);
         Pageable pageable = PageRequest.of(page, size);
-        return orderDetailDao.findByUser(user, pageable).getContent();
+        Page<OrderDetail> orderPage = orderDetailDao.findByUser(user, pageable);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("orders", orderPage.getContent());
+        response.put("totalOrders", orderPage.getTotalElements());
+        return response;
     }
 
 

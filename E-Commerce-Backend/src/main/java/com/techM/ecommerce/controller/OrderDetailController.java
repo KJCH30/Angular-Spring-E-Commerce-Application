@@ -5,10 +5,13 @@ import com.techM.ecommerce.entity.OrderInput;
 import com.techM.ecommerce.entity.TransactionDetails;
 import com.techM.ecommerce.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class OrderDetailController {
@@ -25,10 +28,12 @@ public class OrderDetailController {
 
     @PreAuthorize("hasRole('User')")
     @GetMapping("/getOrderDetails")
-    public List<OrderDetail> getOrderDetails(@RequestParam(defaultValue = "0") int page,
-                                             @RequestParam(defaultValue = "10") int size) {
-        return orderDetailService.getOrderDetails(page, size);
+    public ResponseEntity<Map<String, Object>> getOrderDetails(@RequestParam(defaultValue = "0") int page,
+                                                               @RequestParam(defaultValue = "10") int size) {
+        Map<String, Object> response = orderDetailService.getOrderDetails(page, size);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
 
     @PreAuthorize("hasRole('User')")
     @GetMapping({"/createTransaction/{amount}"})
