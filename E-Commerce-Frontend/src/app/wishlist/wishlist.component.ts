@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { WishlistService } from '../wishlist.service';
 import { CartService } from '../cart.service';
 import { Product } from '../_model/product.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-wishlist',
@@ -19,7 +20,8 @@ export class WishlistComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private wishlistService: WishlistService,
-    private cartService: CartService  
+    private cartService: CartService,
+    private snackBar : MatSnackBar  
   ) { }
 
   ngOnInit(): void {
@@ -51,6 +53,9 @@ export class WishlistComponent implements OnInit {
             product.isAddedToCart = true;
           }
           this.delete(wishlistId);
+        }else {
+          // Display warning message if response is null
+          this.snackBar.open('Product already in cart', 'Close', { duration: 3000 });
         }
       },
       error: (error) => {

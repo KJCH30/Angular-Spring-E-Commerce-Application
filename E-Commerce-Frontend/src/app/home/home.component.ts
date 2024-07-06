@@ -112,7 +112,11 @@ export class HomeComponent implements OnInit {
           const product = this.productDetails.find(p => p.productId === productId);
           if (product) {
             product.isAddedToCart = true;
+            
           }
+        } else {
+          // Display warning message if response is null
+          this.snackBar.open('Product already in cart', 'Close', { duration: 3000 });
         }
       },
       error: (error) => {
@@ -123,6 +127,12 @@ export class HomeComponent implements OnInit {
 
   toggleWishlist(product: any, productId: number, event: Event) {
     event.stopPropagation();
+    
+    if (product.isAddedToCart) {
+      this.snackBar.open('Product already in cart', 'Close', { duration: 2000 });
+      return;
+    }
+    
     if (product.isWishlisted) {
       this.productService.deleteWishlistItem(product.wishlistId).subscribe({
         next: (response) => {
@@ -151,6 +161,7 @@ export class HomeComponent implements OnInit {
       });
     }
   }
+  
 
   public filterProducts(filter: string) {
     this.productDetails = [];

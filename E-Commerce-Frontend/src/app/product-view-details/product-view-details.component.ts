@@ -15,6 +15,8 @@ export class ProductViewDetailsComponent implements OnInit {
   selectedImage = 0
   product!: Product;
   cartStatus = false;
+  warning = false;
+  productDetails: Product[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -34,10 +36,21 @@ export class ProductViewDetailsComponent implements OnInit {
         console.log(response);
         if (response) {  // Check if cartId is present in response
           this.cartService.incrementCartCount();
+          const product = this.productDetails.find(p => p.productId === productId);
+          if (product) {
+            product.isAddedToCart = true;
+            
+          }
           this.cartStatus = true;
           setTimeout(() => {
             this.cartStatus = false;
           }, 3000); // Reset the status after 3 seconds
+        }else {
+          // Display warning message if response is null
+          this.warning = true;
+          setTimeout(() => {
+            this.warning = false;
+          }, 3000)
         }
       },
 

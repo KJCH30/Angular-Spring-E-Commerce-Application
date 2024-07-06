@@ -23,9 +23,9 @@ export class MyOrdersComponent implements OnInit {
 
   getMyOrders(): void {
     this.productService.getOrderDetails(this.pageIndex, this.pageSize).subscribe({
-      next: (resp: MyOrderDetails[]) => {
-        this.myOrderDetails = resp;
-        this.length = 30
+      next: (resp: any) => {
+        this.myOrderDetails = resp.orders;
+        this.length = resp.totalOrders;
       },
       error: (error) => {
         console.log(error);

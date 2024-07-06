@@ -72,10 +72,10 @@ export class ProductService {
   }
   
 
-  public getOrderDetails(page: number, size: number): Observable<MyOrderDetails[]> {
-    return this.httpClient.get<MyOrderDetails[]>(`http://localhost:9090/getOrderDetails?page=${page}&size=${size}`);
-}
-
+  public getOrderDetails(page: number, size: number): Observable<any> {
+    return this.httpClient.get<any>(`http://localhost:9090/getOrderDetails?page=${page}&size=${size}`);
+  }
+  
 public getAllOrderDetailsForAdmin(status : string): Observable<MyOrderDetails[]> {
   return this.httpClient.get<MyOrderDetails[]>(`http://localhost:9090/getAllOrderDetails/${status}`);
 }

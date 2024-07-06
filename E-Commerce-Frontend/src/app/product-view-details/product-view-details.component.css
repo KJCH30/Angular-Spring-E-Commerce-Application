@@ -97,3 +97,14 @@
     margin-right: 5px;
   }
   
+  .warning{
+    margin-top: 10px;
+    color: orange;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+  }
+
+  .warning i{
+    margin-right: 5px;
+  }

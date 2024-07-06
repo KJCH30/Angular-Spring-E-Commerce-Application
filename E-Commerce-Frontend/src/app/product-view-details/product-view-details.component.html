@@ -53,6 +53,9 @@
             <div *ngIf="cartStatus" class="cart-status">
               <i class="fa fa-check-circle"></i> Added to Cart
             </div>
+            <div *ngIf="warning" class="warning">
+              <i class="fa fa-exclamation-circle"></i> Already present in Cart
+            </div>
           </div>
         </div>
       </div>
