@@ -1,33 +1,42 @@
 <div class="container mt-5">
-    <div class="login-card card mx-auto">
-      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Username</mat-label>
-          <input matInput ngModel name="userName" id="userName" placeholder="Username" required>
-          <mat-error *ngIf="loginForm.controls['userName']?.invalid && loginForm.controls['userName']?.touched">
-            Username is required
-          </mat-error>
-        </mat-form-field>
-  
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Enter your password</mat-label>
-          <input ngModel name="userPassword" id="userPassword" matInput [type]="hide ? 'password' : 'text'" required>
-          <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-          <mat-error *ngIf="loginForm.controls['userPassword']?.invalid && loginForm.controls['userPassword']?.touched">
-            Password is required
-          </mat-error>
-        </mat-form-field>
-  
-        <button class="w-100" type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
-      </form>
-    </div>
-    <div class="text-center mt-3">
-      <button class="w-20" mat-raised-button type="button" color="warn" (click)="registerUser()">Create an Account as User</button>
-    </div>
-    <div class="text-center mt-3">
-      <button class="w-20" mat-raised-button type="button" color="primary" (click)="registerVendor()">Create an Account as Vendor</button>
-    </div>
+  <div class="login-card card mx-auto">
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Username</mat-label>
+        <input matInput ngModel name="userName" id="userName" placeholder="Username" required>
+        <mat-error *ngIf="loginForm.controls['userName']?.invalid && loginForm.controls['userName']?.touched">
+          Username is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Enter your password</mat-label>
+        <input ngModel name="userPassword" id="userPassword" matInput [type]="hide ? 'password' : 'text'" required>
+        <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.controls['userPassword']?.invalid && loginForm.controls['userPassword']?.touched">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+
+      <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+      <button class="w-100" type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Login</button>
+    </form>
   </div>
-  
+
+  <div class="text-center mt-3 register-container">
+    <button class="w-45" mat-raised-button type="button" color="warn" (click)="registerUser()">
+      <mat-icon>add</mat-icon>
+      Create an Account as User
+    </button>
+  </div>
+
+  <div class="text-center mt-3 register-container">
+    <button class="w-45" mat-raised-button type="button" color="primary" (click)="registerVendor()">
+      <mat-icon>add</mat-icon>
+      Create an Account as Vendor
+    </button>
+  </div>
+</div>

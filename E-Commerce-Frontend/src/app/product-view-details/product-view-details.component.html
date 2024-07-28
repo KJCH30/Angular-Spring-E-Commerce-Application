@@ -43,11 +43,11 @@
           </div>
   
           <div class="mt-5 text-center">
-            <button mat-raised-button class="buy-now-button" (click)="buyProduct(product.productId)">
+            <button *ngIf="isUser()" mat-raised-button class="buy-now-button" (click)="buyProduct(product.productId)">
               Buy Now
             </button>
             &nbsp;
-            <button mat-raised-button class="add-to-cart-button" (click)="addToCart(product.productId)">
+            <button *ngIf="isUser()" mat-raised-button class="add-to-cart-button" (click)="addToCart(product.productId)">
               <i class="fa fa-shopping-cart"></i> Add to Cart
             </button>
             <div *ngIf="cartStatus" class="cart-status">

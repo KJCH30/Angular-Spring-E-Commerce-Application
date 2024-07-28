@@ -84,4 +84,9 @@ export class ProductViewDetailsComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
+  public isUser() {
+    return this.userAuthService.isUser();
+  }
+
 }
